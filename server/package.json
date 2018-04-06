@@ -1,0 +1,22 @@
+{
+  "name": "wad_project",
+  "version": "0.0.1",
+  "description": "Ara and Richards WAD Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RichardNolan/wad_project.git"
+  },
+  "author": "Richard Nolan and Araceli Lopez Gomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RichardNolan/wad_project/issues"
+  },
+  "homepage": "https://github.com/RichardNolan/wad_project#readme",
+  "dependencies": {
+    "node-fetch": "^2.1.2"
+  }
+}

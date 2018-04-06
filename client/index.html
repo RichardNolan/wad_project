@@ -17,7 +17,11 @@
         console.log(questions)
         // $( '#questions' ).html( JSON.stringify(questions) );
         for(q of questions){
-            $( '#questions' ).append( q.question+"<br>" );
+            $( '#questions' ).append( q.question+"<br>" ).append("<ul>");
+            for (a of q.possible_answers){
+                $( '#questions' ).append("<li>"+a+"</li>");
+            }
+            $( '#questions' ).append("</ul><br>");
         }
     });
 </script>

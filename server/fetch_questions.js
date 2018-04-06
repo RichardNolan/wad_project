@@ -19,7 +19,7 @@ module.exports = function(){
                 possible_answers.sort(randomize); 
                 // console.log(answers);
                 q.possible_answers = possible_answers;
-                q.author = "Ara"
+                q.author = "Ara and Ric"
             } 
             // console.log(questions)
             return questions

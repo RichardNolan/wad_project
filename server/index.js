@@ -1,7 +1,7 @@
 const express = require('express');
-const app = express();
-
 const questions = require('./fetch_questions.js');
+
+const app = express();
 
 app.use((req, res, next)=> {
     res.header("Access-Control-Allow-Origin", "*");
@@ -15,8 +15,8 @@ app.get('/', (req, res, next)=>{
     next();
 });
 
-app.get('/givemequestions', (req, res, next)=>{
-    questions().then(data=>{
+app.get('/questions', (req, res, next)=>{
+    questions(req.query).then(data=>{
         res.send(data);
         next();
     });

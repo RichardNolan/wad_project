@@ -12,7 +12,12 @@
 </body>
 <script>
     $.ajax({
-        url: "http://localhost:3000/givemequestions",
+        url: "http://localhost:3000/questions",
+        data:{
+            amount:5,
+            category:21,
+            difficulty:"easy"
+        }
     }).done(function(questions) {
         console.log(questions)
         // $( '#questions' ).html( JSON.stringify(questions) );

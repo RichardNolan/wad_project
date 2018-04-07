@@ -15,7 +15,7 @@ app.get('/', (req, res, next)=>{
     next();
 });
 
-app.get('/givemequestions', (req, res, next)=>{
+app.get('/questions', (req, res, next)=>{
     questions().then(data=>{
         res.send(data);
         next();

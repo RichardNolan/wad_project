@@ -1,7 +1,7 @@
 
 module.exports = (function(){
     const fetch = require('node-fetch');
-    const root = 'http://localhost:3000/givemequestions';
+    const root = 'http://localhost:3000/questions';
 
     const headers = { 
         'X-Auth-Token': "API_KEY" 
@@ -14,6 +14,6 @@ module.exports = (function(){
     )
 
     return ({
-        questions: ()=> api_fetch(),
+        questions: ()=> api_fetch()
     })
 })()

@@ -3,8 +3,13 @@ import './question.css'
 const Question = (props) => {
     let { category, correct, correct_answer, difficulty, possible_answers, question } = props.question;
     
+    const clean = text => text.indexOf("&")>=0 ? <span dangerouslySetInnerHTML={{__html: text}}/> : text
+
+    possible_answers = possible_answers.map(el=> clean(el))
+    question = clean(question)
+
+
     possible_answers = possible_answers.map((pa, key)=>{
-        // let label_correct = (correct && pa===correct_answer) ? "true" : null
         let isDisabled = correct!==undefined;
         return (
             <button 
@@ -18,8 +23,8 @@ const Question = (props) => {
     })
 
     function checkAnswer(e){
-       (e.target.innerText===correct_answer) && props.onCorrect();
-       (e.target.innerText!==correct_answer) && props.onIncorrect();
+        (e.target.innerText===correct_answer) && props.onCorrect();
+        (e.target.innerText!==correct_answer) && props.onIncorrect();
         moveForward();
     }
 
@@ -33,9 +38,9 @@ const Question = (props) => {
         if(difficulty==="medium") return "**"
         if(difficulty==="hard") return "***"
     }
-
-    let incorrect_statement = `Incorrect  -  The correct answer is: ${correct_answer}`
-    let correct_statement = `Correct  -  The answer is: ${correct_answer}`
+      
+    let incorrect_statement = `Incorrect  -  The correct answer is: ${clean(correct_answer)}`
+    let correct_statement = `Correct  -  The answer is: ${clean(correct_answer)}`
 
     return (
         <div>
@@ -43,6 +48,15 @@ const Question = (props) => {
             <h2>{props.questionNumber}._ {question}</h2>
             {possible_answers}
             <h4>{correct===true ? correct_statement : (correct===false ? incorrect_statement : null)}</h4>
+
+
+            <div>            
+                <div>{['First ', <span>&amp;</span>, ' Second']}</div>
+                <div>{'First &amp; Second'}</div>
+                <div>{clean('First &amp; Second')}</div>
+            </div>
+
+
         </div>
     );
 };

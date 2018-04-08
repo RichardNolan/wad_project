@@ -7,7 +7,7 @@ module.exports = (options={})=>{
 
     // options.amount = options.amount || 10; // set default of 10 questions
     // another way to set defaults but a better method if there is more
-    options = Object.assign({amount:3}, options); 
+    options = Object.assign({amount:10}, options); 
 
     // start with blank array
     let qs = [];
@@ -40,7 +40,7 @@ module.exports = (options={})=>{
                 return q;
             })
 
-
+/*
 
             // 2.
             for(let q of questions){
@@ -69,6 +69,8 @@ module.exports = (options={})=>{
                 q.author = "Ara and Ric"
             } 
             return questions;
+
+*/
         });
 
 

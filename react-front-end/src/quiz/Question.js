@@ -3,7 +3,7 @@ import "./question.css";
 
 const Question = (props) => {
 	let { category, correct, difficulty, question } = props.question;
-    let correct_index = props.question.possible_answers.indexOf(props.question.correct_answer)
+	let correct_index = props.question.possible_answers.indexOf(props.question.correct_answer);
 	const clean = text => {
 		let x = (text.indexOf("&")>=0 && text.indexOf("<span")<0) ? <span dangerouslySetInnerHTML={{__html: text}}/> : text;
 		// console.log(x);
@@ -28,9 +28,9 @@ const Question = (props) => {
 	});
 
 	function checkAnswer(e){
-		console.log(e.target,"||", e.currentTarget)
-		console.log("------------SELECTEDINDEX 1---------------", e.currentTarget.getAttribute("index"))
-		let selected_index = parseInt(e.currentTarget.getAttribute("index"), 10)
+		console.log(e.target,"||", e.currentTarget);
+		console.log("------------SELECTEDINDEX 1---------------", e.currentTarget.getAttribute("index"));
+		let selected_index = parseInt(e.currentTarget.getAttribute("index"), 10);
 		console.log("------------SELECTEDINDEX 2---------------", selected_index,correct_index);
 		(selected_index===correct_index) && props.onCorrect();
 		(selected_index!==correct_index) && props.onIncorrect();

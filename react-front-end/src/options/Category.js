@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 const Category = (props) => {
 	let {categories}=props;
 
 	const clickHandler = (e)=>{
-		console.log(e.target.attributes.catid.value)
+		console.log(e.target.attributes.catid.value);
 		props.setCategory(e.target.attributes.catid.value);
 	};
 
@@ -18,7 +18,7 @@ const Category = (props) => {
 			<button  onClick={clickHandler} catid="">Any Category</button>
 			{categories}
 		</div>
-	)
-}
+	);
+};
 
 export default Category;

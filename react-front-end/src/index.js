@@ -10,8 +10,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 const Application = ()=>{
 	return (
 		<Router><App/></Router>
-	)
-}
+	);
+};
 
 
 ReactDOM.render(<Application />, document.getElementById("root"));

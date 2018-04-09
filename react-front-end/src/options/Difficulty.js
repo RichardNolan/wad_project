@@ -3,7 +3,7 @@ import React from "react";
 const Difficulty = (props) => {
 
 	const clickHandler = (e)=>{
-		props.setDifficulty(e.target.attributes.level.value)
+		props.setDifficulty(e.target.attributes.level.value);
 	};
 
 	return (
@@ -12,7 +12,6 @@ const Difficulty = (props) => {
 			<button onClick={clickHandler} level="easy" >Easy</button>
 			<button onClick={clickHandler} level="medium" >Medium</button>
 			<button onClick={clickHandler} level="hard" >Hard</button>
-			{props.chosen}
 		</div>
 	);
 };

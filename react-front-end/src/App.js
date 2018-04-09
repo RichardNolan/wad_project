@@ -11,8 +11,8 @@ const Home = ()=>{
 		<div>
 			Ara's Homepage
 		</div>
-	)
-}
+	);
+};
 
 class App extends Component {
 	render() {

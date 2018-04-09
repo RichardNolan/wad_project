@@ -18,7 +18,7 @@ module.exports = (options={})=>{
     // join the array with "&" and combine with root to construct a url and query string
     let url = root+qs.join("&");
     
-    console.log("Request made for: "+url)
+    console.log("Request made for: "+url);
     
     return fetch(url)
         // format returned data as json
@@ -38,7 +38,7 @@ module.exports = (options={})=>{
                 // then use our randomize sort function from above to shuffle the array 
                 q.possible_answers = [...q.incorrect_answers, q.correct_answer].sort(randomize);
                 return q;
-            })
+            });
 
 /*
 

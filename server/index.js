@@ -1,5 +1,6 @@
 const express = require('express');
 const questions = require('./fetch_questions.js');
+const categories = require('./fetch_categories.js');
 
 const app = express();
 
@@ -9,7 +10,6 @@ app.use((req, res, next)=> {
     next();
 });
 
-// changed this from app.use (middleware - all requests) to app.get (route - specific to each request)
 app.get('/', (req, res, next)=>{
     res.send("Homepage");
     next();
@@ -20,9 +20,16 @@ app.get('/questions', (req, res, next)=>{
         res.send(data);
         next();
     });
-})
+});
+app.get('/categories', (req, res, next)=>{
+    categories().then(data=>{
+        res.send(data);
+        next();
+    });
+});
+
 
 // added message to show server is running
-app.listen(3000,()=>{
-    console.log('Listening on port 3000');
+app.listen(3001,()=>{
+    console.log('Listening on port 3001');
 });

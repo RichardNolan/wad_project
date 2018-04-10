@@ -15,7 +15,22 @@ const Home = ()=>{
 };
 
 class App extends Component {
+	constructor(){
+		super()
+		this.state={
+			amount:5,
+			difficulty:"",
+			category:""
+		}
+	}
+	
+	setOptions(options){
+		this.setState(options)
+		// REDIRECT SOMEHOW TO QUIZ
+	}
+
 	render() {
+		let options = {category:this.state.category, amount:this.state.amount, difficulty:this.state.difficulty}
 		return (
 			<div className="App">
 				<header className="App-header">
@@ -26,10 +41,11 @@ class App extends Component {
 					</div>
 				</header>
 				<main>
+
 					<Route exact path="/" component={Home} />
-					<Route path="/quiz" component={QuizContainer} />
-					<Route path="/options" component={OptionsContainer} />
-					
+					<Route path="/quiz" render={(props) => <QuizContainer {...props} options={options} />} />
+					<Route path="/options" render={(props) => <OptionsContainer {...props} setOptions={this.setOptions.bind(this)} />} />	
+
 				</main>
 			</div>
 		);

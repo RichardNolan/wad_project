@@ -12,7 +12,7 @@ class QuizContainer extends Component {
 		};
 	}
 	componentDidMount(){
-		fetch.questions().then(questions=>{
+		fetch.questions(this.props.options).then(questions=>{
 			this.setState({questions:questions.map(q=>{
 				q.correct = undefined;
 				return q;

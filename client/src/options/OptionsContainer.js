@@ -7,8 +7,8 @@ import { Route, Link, Redirect } from "react-router-dom";
 
 
 class OptionsContainer extends Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state = {
 			// current_option: 0,
 			difficulty: "",
@@ -55,6 +55,10 @@ class OptionsContainer extends Component {
 		return(this.state.displayPage===options_page && this.props.location.pathname.indexOf(options_page)<0);
 	}
 
+	passOptionsBackUp(){
+		this.props.setOptions({category:this.state.category, amount:this.state.amount, difficulty:this.state.difficulty})
+	}
+
 	render () {
 		// if(this.redirectTo("difficulty"))  return <Redirect push to="/options/difficulty" />;
 		// if(this.redirectTo("amount"))	   return <Redirect push to="/options/amount" />;
@@ -74,6 +78,7 @@ class OptionsContainer extends Component {
 				<Route path="/options/category" render={(props) => <Category {...props} setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} />} />
 				<Route path="/options/difficulty" render={(props) => <Difficulty {...props} setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty} />} />
 				<Route path="/options/amount" render={(props) => <Amount {...props} setAmount={this.setAmount.bind(this)} chosen={this.state.amount} />} />
+				<button onClick={this.passOptionsBackUp.bind(this)} >Finished</button>
 			</div>
 		);
 	}

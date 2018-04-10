@@ -22,7 +22,12 @@ const Quiz = (props) => {
 			<button onClick={props.onPrevious}>Previous</button>
 			<Score questions={props.questions} />
 			<button onClick={props.onNext}>Next</button>
+
+
 			{questions ? questions[props.current] : null}
+
+
+
 		</div>
 	);
 };

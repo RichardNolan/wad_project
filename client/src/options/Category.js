@@ -1,21 +1,30 @@
 import React from "react";
 
 const Category = (props) => {
-	let {categories}=props;
+
+	let categories = props.categories.slice() || [];
+
+	categories.unshift({id:"", name:"Any Category"});
 
 	const clickHandler = (e)=>{
-		console.log(e.target.attributes.catid.value);
-		props.setCategory(e.target.attributes.catid.value);
+		props.setCategory(e.currentTarget.attributes.catid.value);
 	};
 
 	categories=categories.map((cat,index)=>{
-		return <button key={index}  onClick={clickHandler} catid={cat.id}>{cat.name}</button>
+		return (
+		<div key={index}>
+			<a 
+				className="waves-effect waves-light btn answer"
+				onClick={clickHandler} 				
+				catid={cat.id}
+			>{cat.name}</a>
+		</div>
+		)
 	});
 
 
 	return (
 		<div>
-			<button  onClick={clickHandler} catid="">Any Category</button>
 			{categories}
 		</div>
 	);

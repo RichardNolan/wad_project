@@ -1,7 +1,29 @@
 $(document).ready(function(){
 
-    $('#hamburger').on('click', function(){
-       $('#credits').slideToggle('slow') 
+    $('#screen, #credits').on('click', function(){
+        $('.hamburger').click();
     });
- 
+
+    $('.hamburger').on('click', function(){         
+        $top = $(this).children('.top-line');
+        $middle = $(this).children('.middle-line');
+        $bottom = $(this).children('.bottom-line');
+
+        if($middle.css('opacity')!=0){
+            $top.css('top','19px').css( {"transform" : "rotate(45deg)"} );
+            $middle.css('width',0).css( "opacity", 0 );
+            $bottom.css('top','19px').css( {"transform" : "rotate(-45deg)"} );
+            $(this).css( {"transform" : "rotate(180deg)"} );
+            $('#screen').fadeIn('slow');
+            $('#credits').slideDown('slow'); 
+        }else{ 
+            $top.css('top','13px').css( {"transform" : "rotate(0deg)"} );
+            $middle.css('width','19px').css( "opacity", 1 );
+            $bottom.css('top','25px').css( {"transform" : "rotate(0deg)"} );
+            $(this).css( {"transform" : "rotate(0deg)"} );
+            $('#screen').fadeOut('slow');
+            $('#credits').slideUp('slow'); 
+        }
+    });
+
 })

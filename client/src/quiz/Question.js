@@ -1,37 +1,55 @@
 import React from "react";
 import "./question.css";
 
+const clean = text => {
+	let x = (text.indexOf("&")>=0 && text.indexOf("<span")<0) ? <span dangerouslySetInnerHTML={{__html: text}}/> : text;
+	return x;
+};
+
+const Incorrect = (props)=>{
+	return (
+		<div className="result">
+			<div className="symbol incorrect">{'\u2718'}</div>
+			<h5>{props.text}</h5>
+		</div>
+	)
+}
+
+const Correct = (props)=>{
+	return (
+		<div className="result">
+			<div className="symbol correct">{'\u2714'}</div>
+			<h5>{props.text}</h5>
+		</div>
+	)
+}
+
+
 const Question = (props) => {
 	let { category, correct, difficulty, question } = props.question;
-	let correct_index = props.question.possible_answers.indexOf(props.question.correct_answer);
-	const clean = text => {
-		let x = (text.indexOf("&")>=0 && text.indexOf("<span")<0) ? <span dangerouslySetInnerHTML={{__html: text}}/> : text;
-		// console.log(x);
-		return x;
-	};
+	let raw_answers = props.question.possible_answers.slice();
 
+	let correct_index = props.question.possible_answers.indexOf(props.question.correct_answer);
+	
 	let possible_answers = props.question.possible_answers.map(el=> clean(el));
 	question = clean(question);
 
 	possible_answers = possible_answers.map((pa, key)=>{
 		let isDisabled = correct!==undefined;
 		return (
-			<button 
-				onClick={checkAnswer} 
-				key={key}    //private to react
-				index={key}
-				disabled={isDisabled}
-			>
-				{pa}
-			</button>
+			<div key={key}>  		
+				<a 
+					className="waves-effect waves-light btn answer"
+					onClick={checkAnswer} 				
+					index={key}
+					disabled={isDisabled}
+				>{pa}</a>
+			</div>
 		);
 	});
 
 	function checkAnswer(e){
-		console.log(e.target,"||", e.currentTarget);
-		console.log("------------SELECTEDINDEX 1---------------", e.currentTarget.getAttribute("index"));
 		let selected_index = parseInt(e.currentTarget.getAttribute("index"), 10);
-		console.log("------------SELECTEDINDEX 2---------------", selected_index,correct_index);
 		(selected_index===correct_index) && props.onCorrect();
 		(selected_index!==correct_index) && props.onIncorrect();
 		moveForward();
@@ -42,21 +60,18 @@ const Question = (props) => {
 	}
 
 	function difficultyStars(){
-		if(difficulty==="easy") return "*";
-		if(difficulty==="medium") return "**";
-		if(difficulty==="hard") return "***";
+		if(difficulty==="easy") return '\u2718';
+		if(difficulty==="medium") return '\u2718\u2718';
+		if(difficulty==="hard") return '\u2718\u2718';
 	}
 
-	
-	let correct_answer= clean(props.question.correct_answer);
-	console.log("CLEANING======>", props.question.correct_answer, correct_answer);
-	let incorrect_statement = `Incorrect  -  The correct answer is: ${correct_answer}`;
-	let correct_statement = `Correct  -  The answer is: ${correct_answer}`;
-	let statement = correct===true ? correct_statement : (correct===false ? incorrect_statement : null);
+	let correct_answer= clean(raw_answers[correct_index]);
+
+	let statement = correct===true ? <Correct text={correct_answer}/>  : (correct===false ? <Incorrect text={correct_answer}/> : null);
 	return (
 		<div>
 			<h5>{category} - {difficultyStars()}</h5>
-			<h2>{props.questionNumber}._ {question}</h2>
+			<h3>{props.questionNumber}. {question}</h3>
 			{possible_answers}
 			<h4>{statement}</h4>
 		</div>

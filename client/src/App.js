@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import QuizContainer from "./quiz/QuizContainer";
 import OptionsContainer from "./options/OptionsContainer";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Redirect } from "react-router-dom";
 
 
 import "./App.css";
@@ -27,6 +27,7 @@ class App extends Component {
 	setOptions(options){
 		this.setState(options)
 		// REDIRECT SOMEHOW TO QUIZ
+		return <Redirect push to="/quiz" />
 	}
 
 	render() {
@@ -53,23 +54,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-// This could maybe work as a stateless component
-
-// import React from 'react'
-
-// const App = () => {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <h1 className="App-title">QuizzAnywhere</h1>
-//       </header>
-//       <main>
-//         <QuizContainer />
-//       </main>
-//     </div>
-//   )
-// }
-
-// export default App

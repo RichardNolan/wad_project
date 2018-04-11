@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Quiz from "./Quiz";
+import ResultsQuiz from "./ResultsQuiz";
 import fetch from "../fetch.js";
 
 class QuizContainer extends Component {
@@ -36,21 +37,30 @@ class QuizContainer extends Component {
 		if(unanswered_questions===0) this.setState({finished:true});
 	}
 
-	onCorrect(result){
+	onCorrect(index, is_correct){
 		let questions = this.state.questions.slice();
-		questions[this.state.current_question].correct = result;
+		questions[this.state.current_question].correct = is_correct;
+		questions[this.state.current_question].chosen_index = index;
 		this.setState({questions:questions});
 	}
-	
+	// onIncorrect(ans){
+	// 	let questions = this.state.questions.slice();
+	// 	questions[this.state.current_question].correct = false;
+	// 	questions[this.state.current_question].chosen_index = ans;
+	// 	this.setState({questions:questions});
+	// }
 	render() {
 		let x = this.state.finished 
-			? null : <Quiz 
+			? <ResultsQuiz 
+				questions={this.state.questions} 
+			/>
+			: <Quiz 
 				questions={this.state.questions} 
 				current={this.state.current_question}
 				onNext={this.moveCurrent.bind(this,1)}
 				onPrevious={this.moveCurrent.bind(this,-1)}
-				onCorrect={this.onCorrect.bind(this, true)}
-				onIncorrect={this.onCorrect.bind(this, false)}
+				onCorrect={this.onCorrect.bind(this)}
+				// onIncorrect={this.onIncorrect.bind(this)}
 			/>;
 
 		return x;

@@ -12,17 +12,24 @@ const Quiz = (props) => {
 			questionNumber={props.current+1} 
 			question={q} 
 			onCorrect={props.onCorrect} 
-			onIncorrect={props.onIncorrect} 
+			// onIncorrect={props.onIncorrect} 
 			onMoveForward={props.onNext}
 		/>
 	)) 
 		: null;
 	return (
 		<div>
-			<button onClick={props.onPrevious}>Previous</button>
+			<a 
+				className="waves-effect waves-light btn "
+				onClick={props.onPrevious}
+			>Previous</a>
+			{/* <button onClick={props.onPrevious}>Previous</button> */}
 			<Score questions={props.questions} />
-			<button onClick={props.onNext}>Next</button>
-
+			{/* <button onClick={props.onNext}>Next</button> */}
+			<a 
+				className="waves-effect waves-light btn "
+				onClick={props.onNext}
+			>Next</a>
 
 			{questions ? questions[props.current] : null}
 

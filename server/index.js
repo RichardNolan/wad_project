@@ -5,12 +5,26 @@ var bodyParser = require('body-parser');
 
 const questions = require('./fetch_questions.js');
 const categories = require('./fetch_categories.js');
+const db = require('./db.js');
+let isConnected = false;
+db.connect().then((data)=>{
+    // db.insertOne({name:'Ara'}).then(x=>{
+    //     // console.log(x)
+    // })
+    isConnected = data;
+});
+
+
 
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+function dbCheck(req, res, next){
+    !isConnected && res.send({error:true, message:"There was an error connecting"});
+    next()
+}
 
 app.use((req, res, next)=> {
     res.header("Access-Control-Allow-Origin", "*");
@@ -43,6 +57,16 @@ app.get('/api/categories', (req, res, next)=>{
         res.send(data);
         next();
     });
+});
+
+app.get('/:name', dbCheck, (req,res,next)=>{
+    isConnected && db.findOne({surname:req.params.name}).then(data=>{ //if db connected then db.findone
+        res.send(data)
+    }).catch(err=>{
+        res.send({error:true, message:"Not records found"})
+    });   
+
+    
 });
 
 // added message to show server is running

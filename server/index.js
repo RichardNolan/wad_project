@@ -43,13 +43,13 @@ app.use(bodyParser.json());
 /** OUR OWN API ROUTES */
     app.get('/api/custom/quiz/:id', routes.getCustomQuiz);
     app.post('/api/custom/quiz', routes.postCustomQuiz);
-    app.put('/api/custom/quiz', routes.updateCustomQuiz);
-    app.delete('/api/custom/quiz', routes.deleteCustomQuiz);
+    app.put('/api/custom/quiz/:id', routes.updateCustomQuiz);
+    app.delete('/api/custom/quiz/:id', routes.deleteCustomQuiz);
 
-    app.get('/api/custom/question', routes.getCustomQuestion);
+    app.get('/api/custom/question/:id', routes.getCustomQuestion);
     app.post('/api/custom/question', routes.postCustomQuestion);
-    app.put('/api/custom/question', routes.updateCustomQuestion);
-    app.delete('/api/custom/question', routes.deleteCustomQuestion);
+    app.put('/api/custom/question/:id', routes.updateCustomQuestion);
+    app.delete('/api/custom/question/:id', routes.deleteCustomQuestion);
 
     app.get('/api/custom/questions', routes.getCustomQuestions);
     app.post('/api/custom/questions', routes.postCustomQuestions);

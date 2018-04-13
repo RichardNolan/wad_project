@@ -76,7 +76,7 @@ module.exports = (()=>{
 
     // GET CUSTOM/QUIZ
     const _getCustomQuiz = (req,res,next)=>{
-        db.getQuiz({_id:req.params.id}).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Quizzes found"})});      
+        db.getQuiz(req.params.id).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Quizzes found"})});      
     }
 
     // POST CUSTOM/QUIZ
@@ -86,7 +86,7 @@ module.exports = (()=>{
 
     // UPDATE CUSTOM/QUIZ
     const _updateCustomQuiz = (req,res,next)=>{
-        db.updateQuiz(req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Quizzes updated"})});      
+        db.updateQuiz(req.params.id, req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Quizzes updated"})});      
     }
 
     // DELETE CUSTOM/QUIZ

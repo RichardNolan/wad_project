@@ -12,14 +12,14 @@ const Category = (props) => {
 
 	categories=categories.map((cat,index)=>{
 		return (
-		<div key={index}>
-			<a 
-				className="waves-effect waves-light btn answer"
-				onClick={clickHandler} 				
-				catid={cat.id}
-			>{cat.name}</a>
-		</div>
-		)
+			<div key={index}>
+				<a 
+					className="waves-effect waves-light btn answer"
+					onClick={clickHandler} 				
+					catid={cat.id}
+				>{cat.name}</a>
+			</div>
+		);
 	});
 
 

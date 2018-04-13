@@ -2,74 +2,60 @@ const express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 
-
-const questions = require('./fetch_questions.js');
-const categories = require('./fetch_categories.js');
-const db = require('./db.js');
-let isConnected = false;
-db.connect().then((data)=>{
-    // db.insertOne({name:'Ara'}).then(x=>{
-    //     // console.log(x)
-    // })
-    isConnected = data;
-});
-
-
-
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-function dbCheck(req, res, next){
-    !isConnected && res.send({error:true, message:"There was an error connecting"});
-    next()
-}
 
-app.use((req, res, next)=> {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 
-app.get('/', (req, res, next)=>{
-    res.send("Homepage");
-    next();
-});
+/** OUR OWN MODULES */
+    const questions = require('./fetch_questions.js');
+    const categories = require('./fetch_categories.js');
+    const routes = require('./routes.js')
+    const middleware = require('./middleware.js')
 
-app.get('/signup', (req, res, next)=>{
-    res.render('signup', {title:"Signup Page"});
-});
-
-app.get('/app', (req, res, next)=>{
-    res.render('app', {title:"Actual App after build"});
-});
-
-app.get('/api/questions', (req, res, next)=>{
-    questions(req.query).then(data=>{
-        res.send(data);
-        next();
-    });
-});
-
-app.get('/api/categories', (req, res, next)=>{
-    categories().then(data=>{
-        res.send(data);
-        next();
-    });
-});
-
-app.get('/:name', dbCheck, (req,res,next)=>{
-    isConnected && db.findOne({surname:req.params.name}).then(data=>{ //if db connected then db.findone
-        res.send(data)
-    }).catch(err=>{
-        res.send({error:true, message:"Not records found"})
-    });   
+/** CONNECT TO DB AND ON SUCCESSFULLY CONNECTED SET isConnected to true */
+    const db = require('./db.js');
+    db.connect();
 
     
-});
+/** MIDDLEWARE */
+    /** OUR CUSTOM ROUTE LEVEL MIDDLEWARE */
+        app.use('/api', middleware.useApi);
+        app.use('/api/custom', middleware.checkDatabaseConnected)
+
+    /** OUR CUSTOM APPLICATION LEVEL MIDDLEWARE */
+        app.use(middleware.attachCORSHeaders);
+
+
+/** SERVER RENDERED PAGES - NOT CURRENTLY BEING USED*/
+    app.get('/', routes.getRoot);
+    app.get('/signup', routes.getSignup);
+    app.get('/app', routes.getApp);
+
+/** API ROUTES FOR 3rd PARTY QUESTIONS (opentdb.com) */
+    app.get('/api/questions', routes.getQuestions);
+    app.get('/api/categories', routes.getCategories);
+
+/** OUR OWN API ROUTES */
+    app.get('/api/custom/quiz/:id', routes.getCustomQuiz);
+    app.post('/api/custom/quiz', routes.postCustomQuiz);
+    app.put('/api/custom/quiz', routes.updateCustomQuiz);
+    app.delete('/api/custom/quiz', routes.deleteCustomQuiz);
+
+    app.get('/api/custom/question', routes.getCustomQuestion);
+    app.post('/api/custom/question', routes.postCustomQuestion);
+    app.put('/api/custom/question', routes.updateCustomQuestion);
+    app.delete('/api/custom/question', routes.deleteCustomQuestion);
+
+    app.get('/api/custom/questions', routes.getCustomQuestions);
+    app.post('/api/custom/questions', routes.postCustomQuestions);
+
 
 // added message to show server is running
-app.listen(3001,()=>{
-    console.log('Listening on port 3001');
-});
+    app.listen(process.env.port || 3001,()=>{
+        console.log('Listening on port 3001');
+    });

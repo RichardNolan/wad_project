@@ -56,18 +56,23 @@ module.exports = (()=>{
 
     // UPDATE CUSTOM/QUESTION
     const _updateCustomQuestion = (req,res,next)=>{
-        db.updateQuestion(req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Question updated"})});      
+        db.replaceQuestion(req.params.id, req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Question updated"})});      
     }
     
     // DELETE CUSTOM/QUESTION
     const _deleteCustomQuestion = (req,res,next)=>{
-        db.deleteQuestion(req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Question deleted"})});      
+        db.deleteQuestion(req.params.id, req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Question deleted"})});      
     }
 
     // GET CUSTOM/QUESTIONS
     const _getCustomQuestions = (req,res,next)=>{
         db.getQuestions({}).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Questions found"})})
     }
+
+    // GET CUSTOM/QUESTIONS/ID
+    // const _getCustomQuizQuestions = (req,res,next)=>{
+    //     db.getQuizQuestions(req.params.id).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Questions found"})})
+    // }
 
     // POST CUSTOM/QUESTIONS
     const _postCustomQuestions = (req,res,next)=>{
@@ -91,7 +96,7 @@ module.exports = (()=>{
 
     // DELETE CUSTOM/QUIZ
     const _deleteCustomQuiz = (req,res,next)=>{
-        db.deleteQuiz(req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Quizzes deleted"})});      
+        db.deleteQuiz(req.params.id, req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Quizzes deleted"})});      
     }
 
 
@@ -111,6 +116,7 @@ module.exports = (()=>{
         getQuestions:           (req,res,next)=> _getQuestions(req,res,next),           // C
 
         getCustomQuestions:     (req,res,next)=> _getCustomQuestions(req,res,next),     // R
+        getCustomQuizQuestions: (req,res,next)=> _getCustomQuizQuestions(req,res,next), // R
         postCustomQuestions:    (req,res,next)=> _postCustomQuestions(req,res,next),    // C
 
         postCustomQuestion:     (req,res,next)=> _postCustomQuestion(req,res,next),     // C

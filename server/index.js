@@ -52,6 +52,7 @@ app.use(bodyParser.json());
     app.delete('/api/custom/question/:id', routes.deleteCustomQuestion);
 
     app.get('/api/custom/questions', routes.getCustomQuestions);
+    // app.get('/api/custom/questions/:id', routes.getCustomQuizQuestions);
     app.post('/api/custom/questions', routes.postCustomQuestions);
 
 

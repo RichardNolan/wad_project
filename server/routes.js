@@ -1,4 +1,8 @@
 module.exports = (()=>{
+    
+/** OUR OWN MODULES */
+    const questions = require('./fetch_questions.js');
+    const categories = require('./fetch_categories.js');
     const db = require('./db.js');
 
 /** ROUTE FUNCTIONS MOVED DOWN HERE ONLY FOR CLARITY */

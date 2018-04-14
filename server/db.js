@@ -213,12 +213,12 @@ function testFunction(){
 		postQuiz: 			obj=> _saveQuiz(obj),								// C
 		getQuiz: 			id => _getQuiz(id),									// R
 		updateQuiz: 		(id, obj)=> _updateOne(id, obj, _QUIZ),				// U
-		deleteQuiz: 		(id, obj)=> _deleteQuiz(id, obj),				// D
+		deleteQuiz: 		(id, obj)=> _deleteQuiz(id, obj),					// D
 
 		postQuestion: 		obj=> _insertOne(obj, _QUESTIONS),					// C
 		getQuestion: 		id=> _findByID(id, _QUESTIONS),						// R		// PROBABLY NOT NEEDED
 		replaceQuestion: 	(id, obj)=> _replaceOne(id, obj, _QUESTIONS),		// U
-		deleteQuestion: 	(id, obj)=> _deleteQuestion(id, obj),		// D
+		deleteQuestion: 	(id, obj)=> _deleteQuestion(id, obj),				// D
 
 		getQuestions: 		obj=> _find(obj, _QUESTIONS),
 		// getQuizQuestions:	id=>  _find({quiz_id:mongoID(id)}, _QUESTIONS),

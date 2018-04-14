@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import QuizContainer from "./quiz/QuizContainer";
 import OptionsContainer from "./options/OptionsContainer";
-import NewQuestionContainer from "./customQuiz/NewQuestionContainer";
+import CustomQuizContainer from "./customQuiz/CustomQuizContainer";
 import { Route, Link, Redirect } from "react-router-dom";
 
 
@@ -31,6 +31,7 @@ class App extends Component {
 		return <Redirect push to="/quiz" />
 	}
 
+
 	render() {
 		let options = {category:this.state.category, amount:this.state.amount, difficulty:this.state.difficulty}
 		return (
@@ -48,7 +49,7 @@ class App extends Component {
 					<Route exact path="/" component={Home} />
 					<Route path="/quiz" render={(props) => <QuizContainer {...props} options={options} />} />
 					<Route path="/options" render={(props) => <OptionsContainer {...props} setOptions={this.setOptions.bind(this)} />} />	
-					<Route path="/custom" render={(props) => <NewQuestionContainer {...props} setOptions={this.setOptions.bind(this)} />} />	
+					<Route path="/custom" component={CustomQuizContainer} />	
 				</main>
 			</div>
 		);

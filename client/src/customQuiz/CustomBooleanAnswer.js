@@ -3,13 +3,18 @@ import React from "react";
 const CustomBooleanAnswer = (props) => {
 
 	const clickBooleanHandler = (e)=>{
-		let pa = [true,false];
-		let ia = pa.slice();	
-		props.setPossibleAnswers(pa);
-		props.setCorrect(e.currentTarget.attributes.answer.value==="true"?true:false);
-		props.setIncorrectBooleanAnswer(e.currentTarget.attributes.answer.value==="false"?ia.splice(0,1):ia.splice(1,1));
+		// let pa = [true,false];	
+		// props.setCorrect(e.currentTarget.attributes.answer.value==="true"?true:false);
+		// props.setIncorrectBooleanAnswer(e.currentTarget.attributes.answer.value==="false"?pa.splice(0,1):pa.splice(1,1));
+		
+		let correct = e.currentTarget.attributes.answer.value==="true" ? true : false;
+
+		// true/false might need to be strings and capitalize first letter
+
+		props.setCorrect(correct);
+		props.setIncorrectBooleanAnswer([!correct]);
 	};
-	
+	let label = <i className="material-icons prefix">forward</i>
 	return (
 
 		<div>
@@ -17,12 +22,13 @@ const CustomBooleanAnswer = (props) => {
 				className="waves-effect waves-light btn answer"
 				onClick={clickBooleanHandler} 				
 				answer="true"
-			>true</a>
+			>{props.correct && label} true</a>
 			<a 
 				className="waves-effect waves-light btn answer"
 				onClick={clickBooleanHandler} 				
 				answer="false"
-			>false</a>
+			>{!props.correct && label} false</a>
+
 		</div>
 	);
 };

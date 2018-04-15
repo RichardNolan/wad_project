@@ -68,9 +68,9 @@ class OptionsContainer extends Component {
 		return (
 			<div>
 				<div>
-					<Link to="/options/category">Category</Link>
-					<Link to="/options/difficulty">Difficulty</Link>
-					<Link to="/options/amount">Amount</Link>
+					<Link className="waves-effect waves-light btn " to="/options/category">Category</Link>
+					<Link className="waves-effect waves-light btn " to="/options/difficulty">Difficulty</Link>
+					<Link className="waves-effect waves-light btn " to="/options/amount">Amount</Link>
 				</div>
 				{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>
 				<Amount setAmount={this.setAmount.bind(this)} chosen={this.state.amount}/>

@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import NewQuestionContainer from "./NewQuestionContainer";
-import CustomQuizDetails from './CustomQuizDetails';
-import ShareLinks from "../ShareLinks.js"
+import CustomQuizDetails from "./CustomQuizDetails";
+import ShareLinks from "../ShareLinks.js";
 import M from "materialize-css/dist/js/materialize.js";
-import api from '../fetch_api.js'
+import api from "../fetch_api.js";
 
 class CustomQuizContainer extends Component {
 	constructor(){
-		super()
+		super();
 		this.state={
 			returned:null,
 			name:"",
@@ -18,15 +18,20 @@ class CustomQuizContainer extends Component {
 			questions:[],
 			finished:false, 
 			nextQuestion:false	
-		}
+		};
 	}
 	saveQuiz(){
+		//VALIDATE THE QUIZ DETAILS
 		if(this.state.name===""){
 			M.toast({html: "You must enter a name for this quiz"});
 			return false;
 		}
 		if(this.state.password.length<6){
 			M.toast({html: "Password must be at least 6 characters"});
+			return false;
+		}
+		if(this.state.password===""){
+			M.toast({html: "You must enter a password for this quiz"});
 			return false;
 		}
 		if(!this.state.passwordSame){
@@ -36,7 +41,7 @@ class CustomQuizContainer extends Component {
 		api.saveQuiz(this.state)
 			.then(data=>{
 				this.setState({returned:data});
-			})
+			});
 	}
 
 	addQuestion(data){
@@ -72,26 +77,26 @@ class CustomQuizContainer extends Component {
 		this.setState({finished:true});
 	}
 	onResetNextQuestion(){
-		this.setState({nextQuestion:false})
+		this.setState({nextQuestion:false});
 	}
 	render () {
 		let QuizDetailsQuestions = this.state.finished
 			? <CustomQuizDetails 
-					name={this.state.name}
-					password={this.state.password}
-					password_val={this.state.password_val}
-					passwordSame={this.state.passwordSame}
-					nameChangeHandler={this.nameChangeHandler.bind(this)} 
-					passwordChangeHandler={this.passwordChangeHandler.bind(this)}
-					password_valChangeHandler={this.password_valChangeHandler.bind(this)}
-					saveQuiz={this.saveQuiz.bind(this)}
-				/>
+				name={this.state.name}
+				password={this.state.password}
+				password_val={this.state.password_val}
+				passwordSame={this.state.passwordSame}
+				nameChangeHandler={this.nameChangeHandler.bind(this)} 
+				passwordChangeHandler={this.passwordChangeHandler.bind(this)}
+				password_valChangeHandler={this.password_valChangeHandler.bind(this)}
+				saveQuiz={this.saveQuiz.bind(this)}
+			/>
 			: <NewQuestionContainer 
-					addQuestion={this.addQuestion.bind(this)} 
-					nextQuestion={this.state.nextQuestion} 
-					onResetNextQuestion={this.onResetNextQuestion.bind(this)} 
-					onFinishedQuiz={this.finishedQuiz.bind(this)}
-				/>;
+				addQuestion={this.addQuestion.bind(this)} 
+				nextQuestion={this.state.nextQuestion} 
+				onResetNextQuestion={this.onResetNextQuestion.bind(this)} 
+				onFinishedQuiz={this.finishedQuiz.bind(this)}
+			/>;
 		return (
 			<div>
 				{this.state.returned ? <ShareLinks quiz={this.state.returned._id}/> : QuizDetailsQuestions}				

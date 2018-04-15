@@ -14,16 +14,17 @@ const CustomBooleanAnswer = (props) => {
 		props.setCorrect(correct);
 		props.setIncorrectBooleanAnswer([!correct]);
 	};
-	let label = <i className="material-icons prefix">forward</i>
+	let label = <i className="material-icons prefix">forward</i>;
 	return (
 
 		<div>
-			<a 
+			<a  style={{maxWidth:"50%"}}
 				className="waves-effect waves-light btn answer"
 				onClick={clickBooleanHandler} 				
 				answer="true"
 			>{props.correct && label} true</a>
-			<a 
+			<br/>
+			<a style={{maxWidth:"50%"}}
 				className="waves-effect waves-light btn answer"
 				onClick={clickBooleanHandler} 				
 				answer="false"

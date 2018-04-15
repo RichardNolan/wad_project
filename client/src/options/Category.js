@@ -24,8 +24,12 @@ const Category = (props) => {
 
 
 	return (
-		<div>
-			{categories}
+		<div className="row">
+			<div className="card col s10 offset-s1">
+				<div className="input-field">
+					{categories}
+				</div>
+			</div>
 		</div>
 	);
 };

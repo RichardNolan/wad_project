@@ -19,9 +19,9 @@ class App extends Component {
 	constructor(){
 		super()
 		this.state={
-			amount:5,
+			amount:20,
 			difficulty:"",
-			category:""
+			category:"9"
 		}
 	}
 	

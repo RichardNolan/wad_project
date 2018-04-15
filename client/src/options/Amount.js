@@ -27,11 +27,15 @@ const Amount = (props) => {
 	};
 
 	return (
-		<div>
-			{/* media query to show +- on mobile hide on desktop */}
-			<button onClick={stepDown}>-</button>
-			<input ref={el=>amountBox=el} style={{maxWidth:5+"em"}} type="number" step="5" max="50" min="5" onChange={changeHandler} value={props.chosen}/>
-			<button onClick={stepUp}>+</button>
+		<div className="row">
+			<div className="card col s10 offset-s1">
+				<div className="input-field">
+					{/* media query to show +- on mobile hide on desktop */}
+					<button onClick={stepDown}>-</button>
+					<input ref={el=>amountBox=el} style={{maxWidth:5+"em"}} type="number" step="5" max="50" min="5" onChange={changeHandler} value={props.chosen}/>
+					<button onClick={stepUp}>+</button>
+				</div>
+			</div>
 		</div>
 	);
 };

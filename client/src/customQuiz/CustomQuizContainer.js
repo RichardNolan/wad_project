@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import NewQuestionContainer from "./NewQuestionContainer";
 import CustomQuizDetails from './CustomQuizDetails';
+import ShareLinks from "../ShareLinks.js"
+import M from "materialize-css/dist/js/materialize.js";
+import api from '../fetch_api.js'
 
 class CustomQuizContainer extends Component {
 	constructor(){
 		super()
 		this.state={
+			returned:null,
 			name:"",
 			password:"",
 			password_val:"",
@@ -16,7 +20,25 @@ class CustomQuizContainer extends Component {
 			nextQuestion:false	
 		}
 	}
-	
+	saveQuiz(){
+		if(this.state.name===""){
+			M.toast({html: "You must enter a name for this quiz"});
+			return false;
+		}
+		if(this.state.password.length<6){
+			M.toast({html: "Password must be at least 6 characters"});
+			return false;
+		}
+		if(!this.state.passwordSame){
+			M.toast({html: "Passwords don't match"});
+			return false;
+		}
+		api.saveQuiz(this.state)
+			.then(data=>{
+				this.setState({returned:data});
+			})
+	}
+
 	addQuestion(data){
 		let {questions} = this.state;
 		questions.push(data);
@@ -62,12 +84,17 @@ class CustomQuizContainer extends Component {
 					nameChangeHandler={this.nameChangeHandler.bind(this)} 
 					passwordChangeHandler={this.passwordChangeHandler.bind(this)}
 					password_valChangeHandler={this.password_valChangeHandler.bind(this)}
+					saveQuiz={this.saveQuiz.bind(this)}
 				/>
-			: <NewQuestionContainer addQuestion={this.addQuestion.bind(this)} nextQuestion={this.state.nextQuestion} onResetNextQuestion={this.onResetNextQuestion.bind(this)} />;
+			: <NewQuestionContainer 
+					addQuestion={this.addQuestion.bind(this)} 
+					nextQuestion={this.state.nextQuestion} 
+					onResetNextQuestion={this.onResetNextQuestion.bind(this)} 
+					onFinishedQuiz={this.finishedQuiz.bind(this)}
+				/>;
 		return (
 			<div>
-				{QuizDetailsQuestions}
-				<button onClick={this.finishedQuiz.bind(this)}>Finished</button>
+				{this.state.returned ? <ShareLinks quiz={this.state.returned._id}/> : QuizDetailsQuestions}				
 			</div>
 		);
 	}

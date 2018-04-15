@@ -27,7 +27,9 @@ const CustomQuizDetails = (props) => {
 					/>	 
 				</div>
 			</div>
-			
+			<div className="row">
+				<button onClick={props.saveQuiz}>Save Quiz</button>
+			</div>
 		</div>
 	);
 };

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import CustomBooleanAnswer from "./CustomBooleanAnswer.js";
 import CustomMultipleAnswer from "./CustomMultipleAnswer.js";
 import DifficultyStars from "./DifficultyStars.js";
+import M from "materialize-css/dist/js/materialize.js";
 // import "../quiz/question.css";
-
 class NewQuestionContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -89,20 +89,27 @@ class NewQuestionContainer extends Component {
 
 	addQuestion(){
 		let problems = []
+
+		if(this.state.question===""){
+			M.toast({html: "You didn't enter a question" })
+			return false;
+		}
+		if(this.state.correct===""){
+			M.toast({html: "You didn't enter a correct answer" })
+			return false;
+		}
+
 		// VALIDATION ON BLANK ANSWERS
 		if(this.state.incorrect_answers[0]===""){
-			//SET incorrct 1 to red
-			problems.push(1);
+			M.toast({html: 'Missing incorrect answer 1'})
 			return false;
 		}
 		if(this.state.incorrect_answers[1]===""){
-			//SET incorrct 1 to red
-			problems.push(2);
+			M.toast({html: 'Missing incorrect answer 2'})
 			return false;
 		}
 		if(this.state.incorrect_answers[2]===""){
-			//SET incorrct 1 to red
-			M.toast({html: 'Missing Answer 3'})
+			M.toast({html: 'Missing incorrect answer 3'})
 			return false;
 		}
 
@@ -119,13 +126,6 @@ class NewQuestionContainer extends Component {
 		return (
 			<div>
 				<div className="row">
-					<div className="input-field col s10 offset-s1">
-						<i className="material-icons prefix">help_outline</i>
-						<input type="text" id="question"  value={this.state.question} onChange={this.handleQuestion.bind(this)}/>
-						<label htmlFor="question">Input question here</label>
-					</div>
-				</div>
-				<div className="row">
 					<DifficultyStars onDifficultyChange={this.onDifficultyChange.bind(this)}/>
 					<div className="radio">
 						<label>
@@ -135,6 +135,15 @@ class NewQuestionContainer extends Component {
 							<input type="radio" name="type" value="multiple" checked={this.state.type === "multiple"} onChange={this.handleRadioChange.bind(this)}/> <span>4 possible answers</span>
 						</label>
 					</div>
+				</div>
+				<div className="row">
+					<div className="input-field col s10 offset-s1">
+						<i className="material-icons prefix">help_outline</i>
+						<input type="text" id="question"  value={this.state.question} onChange={this.handleQuestion.bind(this)}/>
+						<label htmlFor="question">Input question here</label>
+					</div>
+				</div>
+				<div className="row">
 					<div>
 						{this.state.type==="boolean"
 							? <CustomBooleanAnswer setIncorrectBooleanAnswer={this.setIncorrectBooleanAnswer.bind(this)} setCorrect={this.setCorrect.bind(this)} correct={this.state.correct} />
@@ -150,6 +159,7 @@ class NewQuestionContainer extends Component {
 					</div>
 				</div>	
 				<button onClick={this.addQuestion.bind(this)}>Add Question</button>
+				<button onClick={this.props.onFinishedQuiz}>Finished Quiz</button>
 			</div>
 		);
 	}

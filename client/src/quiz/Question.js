@@ -12,8 +12,8 @@ const Incorrect = (props)=>{
 			{/* <div className="symbol incorrect">{'\u2718'}</div> */}
 			<h5>The correct answer is: {props.text}</h5>
 		</div>
-	)
-}
+	);
+};
 
 const Correct = (props)=>{
 	return (
@@ -21,8 +21,8 @@ const Correct = (props)=>{
 			{/* <div className="symbol correct">{'\u2714'}</div> */}
 			{/* <h5>{props.text}</h5> */}
 		</div>
-	)
-}
+	);
+};
 
 
 const Question = (props) => {
@@ -38,7 +38,6 @@ const Question = (props) => {
 		let isDisabled = correct!==undefined;
 		let tick_incorrect = correct===false && key===chosen_index ? <div className="symbol incorrect">{"\u2718"}</div> : null;
 		let tick_correct = correct===true && key===chosen_index ? <div className="symbol correct">{"\u2714"}</div> : null;
-		console.log(correct, key, chosen_index)
 		return (
 			<div key={key} className="question_div"> 
 				{tick_incorrect} 		
@@ -65,9 +64,9 @@ const Question = (props) => {
 	}
 
 	function difficultyStars(){
-		if(difficulty==="easy") return '\u2605';
-		if(difficulty==="medium") return '\u2605\u2605';
-		if(difficulty==="hard") return '\u2605\u2605\u2605';
+		if(difficulty==="easy") return "\u2605\u2606\u2606";
+		if(difficulty==="medium") return "\u2605\u2605\u2606";
+		if(difficulty==="hard") return "\u2605\u2605\u2605";
 	}
 
 	let correct_answer= clean(raw_answers[correct_index]);
@@ -75,8 +74,8 @@ const Question = (props) => {
 	let statement = correct===true ? <Correct text={correct_answer}/>  : (correct===false ? <Incorrect text={correct_answer}/> : null);
 	return (
 		<div>
-			<h2>____________________</h2>
-			<h5>{category} - {difficultyStars()}</h5>
+			<hr/>
+			<h5>{category} - <span className="amber-text">{difficultyStars()}</span></h5>
 			<h4 className="question_text">{props.questionNumber}. {question}</h4>
 			{possible_answers}
 			{statement}

@@ -16,17 +16,17 @@ const Difficulty = (props) => {
 			<a 
 				className="waves-effect waves-light btn answer"
 				onClick={clickHandler} 				
-				level="Easy"
+				level="easy"
 			>Easy</a>
 			<a 
 				className="waves-effect waves-light btn answer"
 				onClick={clickHandler} 				
-				level="Medium"
+				level="medium"
 			>Medium</a>
 			<a 
 				className="waves-effect waves-light btn answer"
 				onClick={clickHandler} 				
-				level="Hard"
+				level="hard"
 			>Hard</a>
 			{/* <button onClick={clickHandler} level="" >Any</button>
 			<button onClick={clickHandler} level="easy" >Easy</button>

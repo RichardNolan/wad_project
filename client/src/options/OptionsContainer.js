@@ -78,10 +78,10 @@ class OptionsContainer extends Component {
 				<Route path="/options/category" render={(props) => <Category {...props} setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} />} />
 				<Route path="/options/difficulty" render={(props) => <Difficulty {...props} setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty} />} />
 				<Route path="/options/amount" render={(props) => <Amount {...props} setAmount={this.setAmount.bind(this)} chosen={this.state.amount} />} />
-				<a 
+				<Link to="/quiz" 
 					className="waves-effect waves-light btn answer"
 					onClick={this.passOptionsBackUp.bind(this)}
-				>Finished </a>
+				>Finished </Link>
 				{/* <button onClick={this.passOptionsBackUp.bind(this)} >Finished</button> */}
 			</div>
 		);

@@ -15,21 +15,21 @@ class NewQuestionContainer extends Component {
 			category: "custom",
 			possible_answers:[],
 			incorrect_answers:["","",""],
-			correct: "",
+			correct_answer: "",
 			problems:[]
 		};
 	}
 	
 	
 	setCorrect(cor){
-		this.setState({correct:cor}, ()=>{
+		this.setState({correct_answer:cor}, ()=>{
 			this.setPossibleAnswers();  
 		});
 	}
 
 	setPossibleAnswers(){
 		let arr= this.state.incorrect_answers.slice();
-		arr.unshift(this.state.correct);
+		arr.unshift(this.state.correct_answer);
 		arr.sort(()=> 0.5 - Math.random());
 		this.setState({possible_answers:arr});
 	}
@@ -52,7 +52,7 @@ class NewQuestionContainer extends Component {
 			type: event.currentTarget.value,
 			incorrect_answers: ["","",""],
 			possible_answers: [],
-			correct: ""
+			correct_answer: ""
 		});
 	}
 
@@ -75,7 +75,7 @@ class NewQuestionContainer extends Component {
 	cleanQuestionForm(){
 
 			this.setState({
-				correct:"",
+				correct_answer:"",
 				difficulty:"easy",
 				incorrect_answers:["", "", ""],
 				possible_answers:[],
@@ -94,7 +94,7 @@ class NewQuestionContainer extends Component {
 			M.toast({html: "You didn't enter a question" })
 			return false;
 		}
-		if(this.state.correct===""){
+		if(this.state.correct_answer===""){
 			M.toast({html: "You didn't enter a correct answer" })
 			return false;
 		}
@@ -146,9 +146,12 @@ class NewQuestionContainer extends Component {
 				<div className="row">
 					<div>
 						{this.state.type==="boolean"
-							? <CustomBooleanAnswer setIncorrectBooleanAnswer={this.setIncorrectBooleanAnswer.bind(this)} setCorrect={this.setCorrect.bind(this)} correct={this.state.correct} />
+							? <CustomBooleanAnswer 
+								setIncorrectBooleanAnswer={this.setIncorrectBooleanAnswer.bind(this)} 
+								setCorrect={this.setCorrect.bind(this)} 
+								correct={this.state.correct_answer} />
 							: <CustomMultipleAnswer 
-								correct={this.state.correct} 
+								correct={this.state.correct_answer} 
 								incorrect_answers={this.state.incorrect_answers}
 								setIncorrectAnswers={this.setIncorrectAnswers.bind(this)} 
 								setCorrect={this.setCorrect.bind(this)}

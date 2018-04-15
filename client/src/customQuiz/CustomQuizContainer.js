@@ -94,7 +94,7 @@ class CustomQuizContainer extends Component {
 				/>;
 		return (
 			<div>
-				{this.state.returned ? <ShareLinks quiz={this.state.returned._id}/> : QuizDetailsQuestions}				
+				{this.state.returned ? <ShareLinks quiz={this.state.returned}/> : QuizDetailsQuestions}				
 			</div>
 		);
 	}

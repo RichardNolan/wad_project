@@ -23,6 +23,7 @@ module.exports = (function(){
 
 		return(
 		fetch(`${root}${what}/?${qs}`, headers)
+			.then(res=> {console.log(res);return res;})
 			.then(res => res.json())
 			.catch(err=> console.log(`Error: ${err}`))	
 		)	
@@ -30,6 +31,7 @@ module.exports = (function(){
 
 	return ({
 		questions: (options)=> api_fetch("questions", options),
-		categories: ()=> api_fetch("categories")
+		categories: ()=> api_fetch("categories"),
+		quiz: (id)=> api_fetch("custom/quiz/"+id)
 	});
 })();

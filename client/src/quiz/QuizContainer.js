@@ -4,21 +4,33 @@ import ResultsQuiz from "./ResultsQuiz";
 import fetch from "../fetch.js";
 
 class QuizContainer extends Component {
-	constructor() {
+	constructor({ match }) {
 		super();
 		this.state = {
 			current_question : 0,
 			questions:[],
-			finished:false
+			finished:false,
+			quiz: match.params.id
 		};
 	}
 	componentDidMount(){
-		fetch.questions(this.props.options).then(questions=>{
+		let quiz = 
+			this.state.quiz 
+				?	fetch.quiz(this.state.quiz).then(res=>{
+						res.questions = res.questions.map(q=>{
+							q.category = res.name;
+							return q
+						});
+						return res.questions;
+					})
+				: 	fetch.questions(this.props.options);
+
+		quiz.then(questions=>{
 			this.setState({questions:questions.map(q=>{
 				q.correct = undefined;
 				return q;
 			})});
-		});   
+		})   
 	}
 
 	moveCurrent(amount){

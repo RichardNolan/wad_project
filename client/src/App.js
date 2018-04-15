@@ -4,6 +4,7 @@ import OptionsContainer from "./options/OptionsContainer";
 import CustomQuizContainer from "./customQuiz/CustomQuizContainer";
 import { Route, Link, Redirect } from "react-router-dom";
 
+import storage from './localStorage.js'
 
 import "./App.css";
 
@@ -39,21 +40,21 @@ class App extends Component {
 				<div className="navbar-fixed">
 					<nav className="nav-extended">
 						<div className="nav-wrapper">
-						<a href="#" className="brand-logo">Logo</a>
-						
+							<a href="#" className="brand-logo">Logo</a>						
 						</div>
 						<div className="nav-content">
-						<ul className="tabs tabs-transparent">
-							<li className="tab"><Link to="/quiz">Quick Quiz</Link></li>
-							<li className="tab"><Link to="/options">Choose Quiz</Link></li>
-							<li className="tab"><Link to="/custom">Custom Quiz</Link></li>
-						</ul>
+							<ul className="tabs tabs-transparent">
+								<li className="tab"><Link to="/quiz">Quick Quiz</Link></li>
+								<li className="tab"><Link to="/options">Choose Quiz</Link></li>
+								<li className="tab"><Link to="/custom">Create Quiz</Link></li>
+							</ul>
 						</div>
 					</nav>
 				</div>
 				<main>
 					<Route exact path="/" component={Home} />
-					<Route path="/quiz" render={(props) => <QuizContainer {...props} options={options} />} />
+					<Route exact path="/quiz" render={(props) => <QuizContainer {...props} options={options} />} />
+					<Route path="/quiz/:id" render={(props) => <QuizContainer {...props} options={options} />} />
 					<Route path="/options" render={(props) => <OptionsContainer {...props} setOptions={this.setOptions.bind(this)} />} />	
 					<Route path="/custom" component={CustomQuizContainer} />	
 				</main>

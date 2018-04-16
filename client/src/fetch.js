@@ -19,11 +19,10 @@ module.exports = (function(){
     }
     // join the array with "&" and combine with root to construct a url and query string
      qs = qs.join("&");
-	 console.log("FETCH", `${root}${what}/?${qs}`)
 
 		return(
 		fetch(`${root}${what}/?${qs}`, headers)
-			.then(res=> {console.log(res);return res;})
+			// .then(res=> {console.log(res);return res;})
 			.then(res => res.json())
 			.catch(err=> console.log(`Error: ${err}`))	
 		)	

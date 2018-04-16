@@ -4,14 +4,12 @@ import OptionsContainer from "./options/OptionsContainer";
 import CustomQuizContainer from "./customQuiz/CustomQuizContainer";
 import { Route, Link, Redirect } from "react-router-dom";
 
-import storage from './localStorage.js'
-
 import "./App.css";
 
 const Home = ()=>{
 	return (
 		<div>
-			Ara's Homepage
+
 		</div>
 	);
 };
@@ -20,9 +18,9 @@ class App extends Component {
 	constructor(){
 		super()
 		this.state={
-			amount:5,
+			amount:20,
 			difficulty:"",
-			category:""
+			category:"9"
 		}
 	}
 	
@@ -40,7 +38,7 @@ class App extends Component {
 				<div className="navbar-fixed">
 					<nav className="nav-extended">
 						<div className="nav-wrapper">
-							<a href="#" className="brand-logo">Logo</a>						
+							<a href="/" className="brand-logo">Logo</a>						
 						</div>
 						<div className="nav-content">
 							<ul className="tabs tabs-transparent">

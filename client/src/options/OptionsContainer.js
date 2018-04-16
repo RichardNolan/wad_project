@@ -3,7 +3,7 @@ import Difficulty from "./Difficulty.js";
 import Amount from "./Amount.js";
 import Category from "./Category.js";
 import fetch from "../fetch.js";
-import { Route, Link, Redirect } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import SavedQuizzes from "./SavedQuizzes.js"
 
 class OptionsContainer extends Component {
@@ -69,7 +69,9 @@ class OptionsContainer extends Component {
 			<div>
 				<SavedQuizzes/>
 				<div>
-					<Link to="/options/category">Category</Link> | <Link to="/options/difficulty">Difficulty</Link> | <Link to="/options/amount">Amount</Link>
+					<Link className="waves-effect waves-light btn " to="/options/category">Category</Link>
+					<Link className="waves-effect waves-light btn " to="/options/difficulty">Difficulty</Link>
+					<Link className="waves-effect waves-light btn " to="/options/amount">Amount</Link>
 				</div>
 				{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>
 				<Amount setAmount={this.setAmount.bind(this)} chosen={this.state.amount}/>

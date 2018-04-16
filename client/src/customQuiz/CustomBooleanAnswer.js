@@ -7,27 +7,26 @@ const CustomBooleanAnswer = (props) => {
 		// props.setCorrect(e.currentTarget.attributes.answer.value==="true"?true:false);
 		// props.setIncorrectBooleanAnswer(e.currentTarget.attributes.answer.value==="false"?pa.splice(0,1):pa.splice(1,1));
 		
-		let correct = e.currentTarget.attributes.answer.value==="true" ? true : false;
-
-		// true/false might need to be strings and capitalize first letter
+		let correct = e.currentTarget.attributes.answer.value;
 
 		props.setCorrect(correct);
-		props.setIncorrectBooleanAnswer([!correct]);
+		props.setIncorrectBooleanAnswer([correct==="True" ? "False" : "True"]);
 	};
-	let label = <i className="material-icons prefix">forward</i>
+	let label = <i className="material-icons prefix">forward</i>;
 	return (
 
 		<div>
 			<a 
 				className="waves-effect waves-light btn answer"
 				onClick={clickBooleanHandler} 				
-				answer="true"
-			>{props.correct && label} true</a>
-			<a 
+				answer="True"
+			>{props.correct_answer==="True" ? label : null} True</a>
+			<br/>
+			<a
 				className="waves-effect waves-light btn answer"
 				onClick={clickBooleanHandler} 				
-				answer="false"
-			>{!props.correct && label} false</a>
+				answer="False"
+			>{props.correct_answer==="False" ? label : null} False</a>
 
 		</div>
 	);

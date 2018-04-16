@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const CustomQuizDetails = (props) => {
 	return (
@@ -14,7 +14,7 @@ const CustomQuizDetails = (props) => {
 				<div className="input-field">
 					<i className="material-icons prefix">vpn_key</i>
 					<input type="password" id="passwd" value={props.password} 
-						style={props.passwordSame?{background:'#D6F6ED'}:{background:'#F9D9D4'}} 
+						style={props.passwordSame?{background:"#D6F6ED"}:{background:"#F9D9D4"}} 
 						onChange={props.passwordChangeHandler}
 					/>
 					<label htmlFor="passwd">Give a password to keep it yours</label>
@@ -22,13 +22,17 @@ const CustomQuizDetails = (props) => {
 				<div className="input-field">	
 					<i className="material-icons prefix">{props.passwordSame?"done_all":"error_outline"}</i>
 					<input type="password" id="passwd_val" placeholder="Confirm your password" 
-						style={props.passwordSame?{background:'#D6F6ED'}:{background:'#F9D9D4'}} 
+						style={props.passwordSame?{background:"#D6F6ED"}:{background:"#F9D9D4"}} 
 						value={props.password_val} onChange={props.password_valChangeHandler}
 					/>	 
 				</div>
 			</div>
 			<div className="row">
-				<button onClick={props.saveQuiz}>Save Quiz</button>
+				<a 
+					className="waves-effect waves-light btn answer"
+					onClick={props.saveQuiz}
+				>Save Quiz</a>
+				{/* <button onClick={props.saveQuiz}>Save Quiz</button> */}
 			</div>
 		</div>
 	);

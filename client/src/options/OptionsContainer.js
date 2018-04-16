@@ -4,7 +4,8 @@ import Amount from "./Amount.js";
 import Category from "./Category.js";
 import fetch from "../fetch.js";
 import { Route, Link } from "react-router-dom";
-import SavedQuizzes from "./SavedQuizzes.js"
+import SavedQuizzes from "./SavedQuizzes.js";
+import M from "materialize-css/dist/js/materialize.js";
 
 class OptionsContainer extends Component {
 	constructor(props){
@@ -24,6 +25,8 @@ class OptionsContainer extends Component {
 		fetch.categories().then(categories=>{
 			this.setState({categories:categories});
 		});   
+		var elem = document.querySelector('.collapsible');
+		var instance = M.Collapsible.init(elem);
 	}
 
 	setCategory(cat){
@@ -66,24 +69,35 @@ class OptionsContainer extends Component {
 		
 
 		return (
-			<div>
-				<SavedQuizzes/>
-				<div>
-					<Link className="waves-effect waves-light btn " to="/options/category">Category</Link>
-					<Link className="waves-effect waves-light btn " to="/options/difficulty">Difficulty</Link>
-					<Link className="waves-effect waves-light btn " to="/options/amount">Amount</Link>
+			<div><SavedQuizzes/>
+				<ul className="collapsible">
+					<li>
+						<div className="collapsible-header"><i className="material-icons">filter_drama</i>Saved Quizzes</div>
+						<div className="collapsible-body">hghgjh</div>
+					</li>
+					<li>
+						<div className="collapsible-header"><i className="material-icons">place</i>Second</div>
+				
+						<div className="collapsible-body">
+							<div>
+								<Link className="waves-effect waves-light btn " to="/options/category">Category</Link>
+								<Link className="waves-effect waves-light btn " to="/options/difficulty">Difficulty</Link>
+								<Link className="waves-effect waves-light btn " to="/options/amount">Amount</Link>
+							</div>
+						{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>
+						<Amount setAmount={this.setAmount.bind(this)} chosen={this.state.amount}/>
+						<Category setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} /> */}
+						<Route path="/options/category" render={(props) => <Category {...props} setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} />} />
+						<Route path="/options/difficulty" render={(props) => <Difficulty {...props} setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty} />} />
+						<Route path="/options/amount" render={(props) => <Amount {...props} setAmount={this.setAmount.bind(this)} chosen={this.state.amount} />} />
+						<Link to="/quiz" 
+							className="waves-effect waves-light btn answer"
+							onClick={this.passOptionsBackUp.bind(this)}
+						>Finished </Link>
+						{/* <button onClick={this.passOptionsBackUp.bind(this)} >Finished</button> */}
 				</div>
-				{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>
-				<Amount setAmount={this.setAmount.bind(this)} chosen={this.state.amount}/>
-				<Category setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} /> */}
-				<Route path="/options/category" render={(props) => <Category {...props} setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} />} />
-				<Route path="/options/difficulty" render={(props) => <Difficulty {...props} setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty} />} />
-				<Route path="/options/amount" render={(props) => <Amount {...props} setAmount={this.setAmount.bind(this)} chosen={this.state.amount} />} />
-				<Link to="/quiz" 
-					className="waves-effect waves-light btn answer"
-					onClick={this.passOptionsBackUp.bind(this)}
-				>Finished </Link>
-				{/* <button onClick={this.passOptionsBackUp.bind(this)} >Finished</button> */}
+					</li>
+				</ul>
 			</div>
 		);
 	}

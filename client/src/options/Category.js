@@ -13,7 +13,7 @@ const Category = (props) => {
 		return (
 			<div key={index}>
 				<a 
-					className="waves-effect waves-light btn answer"
+					className="waves-effect btn answer"
 					onClick={clickHandler} 				
 					catid={cat.id}
 				>{cat.name}</a>

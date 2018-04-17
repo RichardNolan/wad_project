@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import EditCustomQuizName from "./EditCustomQuizName.js";
 import FETCH from "../fetch.js";
 import storage from "../localStorage.js";
-
+import QuestionList from "./QuestionList.js";
 import M from "materialize-css/dist/js/materialize.js";
 
 
@@ -17,8 +17,7 @@ class EditQuizContainer extends Component {
 
 	componentDidMount(){
 		FETCH.quiz(this.state.id).then(res=>{
-			console.log("RETURN FROM FETCH", res)
-			this.setState({name:res.name});
+			this.setState({name:res.name, questions:res.questions });
 		});
 	}
 
@@ -29,16 +28,20 @@ class EditQuizContainer extends Component {
 	updateName(){
 		FETCH.updateName(this.state.id, {name:this.state.name, password:prompt("pw")})
 			.then(res=>{
-				console.log("RETURN FROM FETCH", res)
+				console.log("RETURN FROM FETCH", res);
 				if(res.data){
 					storage.updateName(this.state.name, this.state.id);
 					M.toast({html: "You have updated the quiz name"});
 				}
 					
-					 //MAYBE AN ERROR
+				//MAYBE AN ERROR
 			});
 	}
 
+	setEditId(id){
+		this.setState({editid:id});
+	}
+	
 	render () {
 		return (
 			<div>
@@ -47,6 +50,7 @@ class EditQuizContainer extends Component {
 					nameChangeHandler={this.nameChangeHandler.bind(this)} 
 					updateName={this.updateName.bind(this)}
 				/>
+				<QuestionList questions={this.state.questions} editid={this.state.editid} setEditId={this.setEditId.bind(this) }/>
 			</div>
 		);
 	}

@@ -9,12 +9,12 @@ const EditCustomQuizName = (props) => {
 					<input type="text" id="quiz_name" value={props.name} onChange={props.nameChangeHandler} />
 					<label htmlFor="quiz_name" className="active">Name your quiz here</label>
 				</div>
-			</div>
-			<div className="row">
-				<a 
-					className="waves-effect btn answer"
-					onClick={props.updateName}
-				>Update Name</a>
+				<div className="row">
+					<a 
+						className="waves-effect btn answer"
+						onClick={props.updateName}
+					>Update Name</a>
+				</div>
 			</div>
 		</div>
 	);

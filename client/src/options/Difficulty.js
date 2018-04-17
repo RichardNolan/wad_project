@@ -11,22 +11,22 @@ const Difficulty = (props) => {
 			<div className="card col s10 offset-s1">
 				<div className="input-field">
 					<a 
-						className="waves-effect waves-light btn answer"
+						className="waves-effect btn answer"
 						onClick={clickHandler} 				
 						level=""
 					>Any</a>
 					<a 
-						className="waves-effect waves-light btn answer"
+						className="waves-effect btn answer"
 						onClick={clickHandler} 				
 						level="easy"
 					>Easy</a>
 					<a 
-						className="waves-effect waves-light btn answer"
+						className="waves-effect btn answer"
 						onClick={clickHandler} 				
 						level="medium"
 					>Medium</a>
 					<a 
-						className="waves-effect waves-light btn answer"
+						className="waves-effect btn answer"
 						onClick={clickHandler} 				
 						level="hard"
 					>Hard</a>

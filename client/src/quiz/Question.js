@@ -43,7 +43,7 @@ const Question = (props) => {
 				{tick_incorrect} 		
 				{tick_correct} 		
 				<a 
-					className="waves-effect waves-light btn answer"
+					className="waves-effect btn answer"
 					onClick={checkAnswer} 				
 					index={key}
 					disabled={isDisabled}

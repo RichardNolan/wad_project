@@ -20,7 +20,7 @@ const Score = (props) => {
 	// 	}		
 	// });
 
-	let difficultyArray = ["none", "easy", "medium", "hard"]
+	let difficultyArray = ["none", "easy", "medium", "hard"];
 	let Tscore = props.questions.reduce((t,q)=>{
 		return q.correct ?  t + difficultyArray.indexOf(q.difficulty) : t;
 	},0);

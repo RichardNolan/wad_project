@@ -82,10 +82,14 @@ class OptionsContainer extends Component {
 					<li className="active">
 						<div className="collapsible-header  "><i className="material-icons">extension</i>Customise a Quiz </div>
 						<div className="collapsible-body">
-							<div>
-								<Link className="waves-effect btn" to="/options/category">Category</Link>
-								<Link className="waves-effect btn" to="/options/difficulty">Difficulty</Link>
-								<Link className="waves-effect btn" to="/options/amount">Amount</Link>
+							<div className="row">
+								<div className="card col s10 offset-s1 ">
+									<div className="card-content">
+										<Link className="waves-effect btn answer" to="/options/category">Category</Link>
+										<Link className="waves-effect btn answer" to="/options/difficulty">Difficulty</Link>
+										<Link className="waves-effect btn answer" to="/options/amount">Amount</Link>
+									</div>
+								</div>
 							</div>
 							{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>
 							<Amount setAmount={this.setAmount.bind(this)} chosen={this.state.amount}/>

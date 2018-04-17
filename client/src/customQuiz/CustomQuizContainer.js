@@ -20,6 +20,7 @@ class CustomQuizContainer extends Component {
 			nextQuestion:false	
 		};
 	}
+	
 	saveQuiz(){
 		//VALIDATE THE QUIZ DETAILS
 		if(this.state.name===""){
@@ -51,7 +52,6 @@ class CustomQuizContainer extends Component {
 		return true;
 	}
 
-
 	nameChangeHandler(e){
 		this.setState({name:e.currentTarget.value});
 	}
@@ -73,12 +73,15 @@ class CustomQuizContainer extends Component {
 			? this.setState({passwordSame:true}) 
 			: this.setState({passwordSame:false});
 	}
+
 	finishedQuiz(){
 		this.setState({finished:true});
 	}
+
 	onResetNextQuestion(){
 		this.setState({nextQuestion:false});
 	}
+
 	render () {
 		let QuizDetailsQuestions = this.state.finished
 			? <CustomQuizDetails 

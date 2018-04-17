@@ -4,21 +4,25 @@ import CustomMultipleAnswer from "./CustomMultipleAnswer.js";
 import DifficultyStars from "./DifficultyStars.js";
 import M from "materialize-css/dist/js/materialize.js";
 // import "../quiz/question.css";
+
 class NewQuestionContainer extends Component {
 	constructor(props) {
 		super(props);
-		
-		this.state = {
-			type: "multiple",
-			difficulty: "easy",
-			correct:null,
-			question: "",
-			category: "custom",
-			possible_answers:[],
-			incorrect_answers:["","",""],
-			correct_answer: "",
-			problems:[]
-		};
+		if(props.question){
+			this.state=props.question;
+		}else{
+			this.state = {
+				type: "multiple",
+				difficulty: "easy",
+				correct:null,
+				question: "",
+				category: "custom",
+				possible_answers:[],
+				incorrect_answers:["","",""],
+				correct_answer: "",
+				// problems:[]
+			};
+		}
 	}
 	
 	
@@ -85,30 +89,30 @@ class NewQuestionContainer extends Component {
 	}
 
 	isValidQuestion(){
-			// VALIDATION ON BLANK QUESTION AND CORRECT ANSWER
-			if(this.state.question===""){
-				M.toast({html: "You didn't enter a question" });
-				return false;
-			}
-			if(this.state.correct_answer===""){
-				M.toast({html: "You didn't enter a correct answer" })
-				return false;
-			}
-	
-			// VALIDATION ON BLANK WRONG ANSWERS
-			if(this.state.incorrect_answers[0]===""){
-				M.toast({html: "Missing incorrect answer 1"});
-				return false;
-			}
-			if(this.state.incorrect_answers[1]===""){
-				M.toast({html: "Missing incorrect answer 2"});
-				return false;
-			}
-			if(this.state.incorrect_answers[2]===""){
-				M.toast({html: "Missing incorrect answer 3"});
-				return false;
-			}
-			return true;
+		// VALIDATION ON BLANK QUESTION AND CORRECT ANSWER
+		if(this.state.question===""){
+			M.toast({html: "You didn't enter a question" });
+			return false;
+		}
+		if(this.state.correct_answer===""){
+			M.toast({html: "You didn't enter a correct answer" })
+			return false;
+		}
+
+		// VALIDATION ON BLANK WRONG ANSWERS
+		if(this.state.incorrect_answers[0]===""){
+			M.toast({html: "Missing incorrect answer 1"});
+			return false;
+		}
+		if(this.state.incorrect_answers[1]===""){
+			M.toast({html: "Missing incorrect answer 2"});
+			return false;
+		}
+		if(this.state.incorrect_answers[2]===""){
+			M.toast({html: "Missing incorrect answer 3"});
+			return false;
+		}
+		return true;
 	}
 
 	addQuestion(cb){
@@ -118,6 +122,15 @@ class NewQuestionContainer extends Component {
 				this.cleanQuestionForm();
 				if(typeof cb === "function") cb();
 			}
+		}
+	}
+	updateQuestion(cb){
+		if(this.isValidQuestion()){
+			console.log("UPDATE THE QUESTION");
+			// api.saveQuiz(this.state)
+			// .then(data=>{
+			// 	this.setState({returned:data});
+			// });
 		}
 	}
 
@@ -155,7 +168,7 @@ class NewQuestionContainer extends Component {
 							<div className="input-field col s10 offset-s1">
 								<i className="material-icons prefix">help_outline</i>
 								<input type="text" id="question"  value={this.state.question} onChange={this.handleQuestion.bind(this)}/>
-								<label htmlFor="question">Input question here</label>
+								<label htmlFor="question" className={this.props.question ? "active":null}>Input question here</label>
 							</div>
 						</div>
 						<div className="row">
@@ -171,30 +184,35 @@ class NewQuestionContainer extends Component {
 										incorrect_answers={this.state.incorrect_answers}
 										setIncorrectAnswers={this.setIncorrectAnswers.bind(this)} 
 										setCorrect={this.setCorrect.bind(this)}
-										problems={this.state.problems}
+										// problems={this.state.problems}
+										question={this.props.question}
 									  />
 								}
 								
 							</div>
 						</div>	
-						<a 
-							className="waves-effect waves-light btn answer"
-							onClick={this.addQuestion.bind(this)}
-						>Add Question</a>
+						{this.props.question
+							? <a 
+								className="waves-effect btn answer"
+								onClick={this.updateQuestion.bind(this)}
+							>Update Question</a>
+							:<a 
+								className="waves-effect btn answer "
+								onClick={this.addQuestion.bind(this)}
+							>Add Question</a>}		
+						
 						{/* <button onClick={this.addQuestion.bind(this)}>Add Question</button> */}
+						
 					</div>
 				</div>
-
-
-
-
-				<a 
-					className="waves-effect waves-light btn answer"
-					//TEST THE LINE COMMENTED...
-					onClick={this.finishedQuiz.bind(this)}
-					// onClick={this.props.onFinishedQuiz}
-				>Finished Quiz</a>
-				{/* <button onClick={this.props.onFinishedQuiz}>Finished Quiz</button> */}
+				{this.props.question   // if we are passsing question, we are updating
+					?null
+					:<a 
+						className="waves-effect btn answer"
+						onClick={this.finishedQuiz.bind(this)}
+						// onClick={this.props.onFinishedQuiz}
+					>Finished Quiz</a>
+				}
 			</div>
 		);
 	}

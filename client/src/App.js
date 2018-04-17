@@ -4,7 +4,7 @@ import OptionsContainer from "./options/OptionsContainer";
 import CustomQuizContainer from "./customQuiz/CustomQuizContainer";
 import { Route, Link } from "react-router-dom";
 import EditQuizContainer from "./customQuiz/EditQuizContainer.js";
-
+import logo from "./logowhite.png";
 import "./App.css";
 
 const Home = ()=>{
@@ -37,7 +37,7 @@ class App extends Component {
 				<div className="navbar-fixed">
 					<nav className="nav-extended">
 						<div className="nav-wrapper">
-							<a href="/" className="brand-logo">Logo</a>						
+							<img src={logo} className="brand-logo bounceInLeft" style={{maxWidth:"60px"}} alt="GoQuiz Logo"/>						
 						</div>
 						<div className="nav-content">
 							<ul className="tabs tabs-transparent">

@@ -16,19 +16,22 @@ const CustomBooleanAnswer = (props) => {
 	let label = <div className="symbol ">{"\u25B6"}</div>;
 	return (
 
-		<div>
-			<a 
-				className="waves-effect waves-light btn answer"
-				onClick={clickBooleanHandler} 				
-				answer="True"
-			>{props.correct_answer==="True" ? label : null} True</a>
-			<br/>
-			<a
-				className="waves-effect waves-light btn answer"
-				onClick={clickBooleanHandler} 				
-				answer="False"
-			>{props.correct_answer==="False" ? label : null} False</a>
-
+		<div className="row">
+			<div className="card col s10 offset-s1 ">
+				<div className="card-content">
+					<a 
+						className="waves-effect btn answer"
+						onClick={clickBooleanHandler} 				
+						answer="True"
+					>{props.correct_answer==="True" ? label : null} True</a>
+					<br/>
+					<a
+						className="waves-effect btn answer"
+						onClick={clickBooleanHandler} 				
+						answer="False"
+					>{props.correct_answer==="False" ? label : null} False</a>
+				</div>
+			</div>
 		</div>
 	);
 };

@@ -3,7 +3,7 @@ import EditCustomQuizName from "./EditCustomQuizName.js";
 import fetch from "../fetch.js";
 import fetch_api from "../fetch_api.js";
 import storage from "../localStorage.js";
-
+import QuestionList from "./QuestionList.js";
 import M from "materialize-css/dist/js/materialize.js";
 
 
@@ -18,7 +18,7 @@ class EditQuizContainer extends Component {
 
 	componentDidMount(){
 		fetch.quiz(this.state.id).then(res=>{
-			this.setState({name:res.name});
+			this.setState({name:res.name, questions:res.questions });
 		});
 
 	}
@@ -35,10 +35,14 @@ class EditQuizContainer extends Component {
 					M.toast({html: "You have updated the quiz name"});
 				}
 					
-					 //MAYBE AN ERROR
+				//MAYBE AN ERROR
 			});
 	}
 
+	setEditId(id){
+		this.setState({editid:id});
+	}
+	
 	render () {
 		return (
 			<div>
@@ -47,6 +51,7 @@ class EditQuizContainer extends Component {
 					nameChangeHandler={this.nameChangeHandler.bind(this)} 
 					updateName={this.updateName.bind(this)}
 				/>
+				<QuestionList questions={this.state.questions} editid={this.state.editid} setEditId={this.setEditId.bind(this) }/>
 			</div>
 		);
 	}

@@ -32,7 +32,7 @@ const Amount = (props) => {
 				<div className="input-field">
 					{/* media query to show +- on mobile hide on desktop */}
 					<button onClick={stepDown}>-</button>
-					<input ref={el=>amountBox=el} style={{maxWidth:5+"em"}} type="number" step="5" max="50" min="5" onChange={changeHandler} value={props.chosen}/>
+					<input ref={el=>amountBox=el} style={{maxWidth:2+"em", textAlign:"center" }} type="number" step="5" max="50" min="5" onChange={changeHandler} value={props.chosen}/>
 					<button onClick={stepUp}>+</button>
 				</div>
 			</div>

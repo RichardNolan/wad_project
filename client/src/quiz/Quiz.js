@@ -20,14 +20,14 @@ const Quiz = (props) => {
 	return (
 		<div>
 			<a 
-				className="waves-effect waves-light btn "
+				className="waves-effect btn "
 				onClick={props.onPrevious}
 			>&#9666;</a>
 			{/* <button onClick={props.onPrevious}>Previous</button> */}
 			<Score questions={props.questions} />
 			{/* <button onClick={props.onNext}>Next</button> */}
 			<a 
-				className="waves-effect waves-light btn "
+				className="waves-effect btn "
 				onClick={props.onNext}
 			>&#9656;</a>
 

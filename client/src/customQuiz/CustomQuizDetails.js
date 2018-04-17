@@ -29,7 +29,7 @@ const CustomQuizDetails = (props) => {
 			</div>
 			<div className="row">
 				<a 
-					className="waves-effect waves-light btn answer"
+					className="waves-effect btn answer"
 					onClick={props.saveQuiz}
 				>Save Quiz</a>
 				{/* <button onClick={props.saveQuiz}>Save Quiz</button> */}

@@ -15,14 +15,13 @@ module.exports = (()=>{
       
 
     const _FETCH = (method, url, data)=>{
-        console.log(url)
         return fetch(root+url, {
             method: method,
             body: JSON.stringify(data),
             headers:headers
         })
         .then(res=>res.json())
-        .catch((err)=> ({error:true, message:"Cannot fetch at the moment, please try again soon"}) )	
+        .catch((err)=> ({error:true, message:err}) )	
     }
 
     
@@ -41,11 +40,12 @@ module.exports = (()=>{
 
     return{
         saveQuiz: (data)=> _POST("/custom/quiz", data),
-        updateName: (id, name)=> _PUT("/custom/quiz/"+id, {name:name}),
+        updateName: (id, obj)=> _PUT("/custom/quiz/"+id, obj),
 
         
 		questions: (options)=> _GET("/questions/?"+makeQsFromObject(options)),
 		categories: ()=> _GET("/categories"),
-		quiz: (id)=> _GET("/custom/quiz/"+id)
+        quiz: (id)=> _GET("/custom/quiz/"+id),
+        deleteQuiz: (id, obj)=> _DELETE("/custom/quiz/"+id, obj)
     }
 })()

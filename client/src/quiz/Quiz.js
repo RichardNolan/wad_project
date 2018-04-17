@@ -31,8 +31,8 @@ const Quiz = (props) => {
 				onClick={props.onNext}
 			>&#9656;</a>
 
-			{questions ? questions[props.current] : null}
-
+			{questions.length>0 ? questions[props.current] : "LOADING  COMPONENT"}
+			
 
 
 		</div>

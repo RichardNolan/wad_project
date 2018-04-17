@@ -51,8 +51,8 @@ module.exports = (()=>{
 	const _findByID = (id, collection)=>{
 		return new Promise((resolve, reject)=>{					
 			collection && collection.findOne({_id:mongoID(id)}, (err, data)=>{
-				if(err) reject({error:true, message:"Error getting questions"})
-				resolve(data);
+				if(err) reject({error:true, message:"Error getting by ID"})
+				data!==null ? resolve(data) : reject({error:true, message:"Error getting by ID"});
 			})
 		})
 	}
@@ -105,7 +105,18 @@ module.exports = (()=>{
 		return new Promise((resolve, reject)=>{					
 			collection && collection.deleteOne({_id:mongoID(id)}, (err, data)=>{
 				if(err || data.deletedCount===0) reject({error:true, message:"Nothing was deleted"})
-				else resolve(true);
+				else resolve({id:id});
+			})
+		})
+	}
+
+	
+
+	const _deleteMany = (obj, collection)=>{
+		return new Promise((resolve, reject)=>{					
+			collection && collection.deleteMany(obj, (err, data)=>{
+				if(err || data.deletedCount===0) reject({error:true, message:"Bulk delete failed"})
+				else resolve({id: obj.quiz_id, deleted: data.deletedCount});
 			})
 		})
 	}
@@ -150,24 +161,47 @@ const _saveQuiz = obj=>{
 }
 
 const _deleteQuiz = (id, obj)=>{
+	return _checkPassword(id, obj.password)
+		.then(()=>_deleteOne(id, _QUIZ).then(res=>{
+			return _deleteMany({quiz_id:mongoID(id)}, _QUESTIONS)
+				.then(res=>res)
+				.catch(err=>err)
+		}))
+		.catch(err=>err)
+}
 
-	return _checkPassword(id, obj.password).then(response=>{
-		response && _deleteOne(id, _QUIZ)
-	})
-	// NOW DELETE ALL THE QUESTIONS FROM THAT QUIZ
-
+const _updateQuiz = (id, obj)=>{
+	return _checkPassword(id, obj.password)
+		.then(()=>_updateOne(id, obj, _QUIZ))
+		.catch(err=>err)
 }
 
 const _deleteQuestion = (id, obj)=>{
-	return _checkPassword(obj.quiz_id, obj.password).then(response=>{
-		response && _deleteOne(id, _QUESTIONS)
-	}) 
-}
+	return _checkPassword(obj.quiz_id, obj.password)
+		.then(()=> _deleteOne(id, _QUESTIONS))
+		.catch(err=>err)
+	}
+
+
+/**
+ * RETURNED BOOLEAN WHICH WE CHANGED TO RETURN A RESOLVED PROMISE (BELOW)
+ */
+// const _checkPassword = (quiz_id, password)=>{
+// 	return _findByID(quiz_id, _QUIZ).then(data=> {
+// 		return data.password===password
+// 	}).catch(err=> ({error:true, message:"PASSWORD FAILED"}))
+// }
+
 
 const _checkPassword = (quiz_id, password)=>{
-	return _findByID(quiz_id, _QUIZ).then(data=> data.password===password)
+	return new Promise((resolve, reject)=>{
+		_findByID(quiz_id, _QUIZ)
+			.then(data=> {
+				data.password===password ? resolve(true) : reject({error:true, message:"PASSWORD FAILED"})
+			})
+			.catch(err=> reject(err))
+		})	
 }
-
 
 
 
@@ -212,7 +246,7 @@ function testFunction(){
 
 		postQuiz: 			obj=> _saveQuiz(obj),								// C
 		getQuiz: 			id => _getQuiz(id),									// R
-		updateQuiz: 		(id, obj)=> _updateOne(id, obj, _QUIZ),				// U
+		updateQuiz: 		(id, obj)=> _updateQuiz(id, obj, _QUIZ),			// U
 		deleteQuiz: 		(id, obj)=> _deleteQuiz(id, obj),					// D
 
 		postQuestion: 		obj=> _insertOne(obj, _QUESTIONS),					// C

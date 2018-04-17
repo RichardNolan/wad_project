@@ -27,7 +27,7 @@ class EditQuizContainer extends Component {
 	}
 
 	updateName(){
-		FETCH.updateName(this.state.id, this.state.name)
+		FETCH.updateName(this.state.id, {name:this.state.name, password:prompt("pw")})
 			.then(res=>{
 				console.log("RETURN FROM FETCH", res)
 				if(res.data){

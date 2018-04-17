@@ -43,9 +43,15 @@ module.exports = (()=>{
     // THIS IS THE STANDARD RESPONSE FOR ALL API CRUD REQUESTS
     // IF DATA IS RETURNED RES.SEND IT OTHERWISE SEND AN EMPTY OBJECT
     const respond = (data, res)=>{
-        data
-        ? res.send(data)
-        : res.send({});
+        console.log("RESPOND", data)
+        // data
+        // ? res.send(data)
+        // : res.send({});
+        if(data){
+            res.send(data)
+        }else{
+            res.send({})
+        }
     }
 
     // GET CUSTOM/QUESTION
@@ -100,6 +106,7 @@ module.exports = (()=>{
 
     // DELETE CUSTOM/QUIZ
     const _deleteCustomQuiz = (req,res,next)=>{
+        console.log(req.params.id, req.body)
         db.deleteQuiz(req.params.id, req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Quizzes deleted"})});      
     }
 

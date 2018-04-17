@@ -1,20 +1,34 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import storage from '../localStorage.js'
+import FETCH from "../fetch.js";
+import $ from '../../node_modules/jquery/dist/jquery.min'
+
+import M from "materialize-css/dist/js/materialize.js";
 
 const SavedQuizzes = ()=>{
     let quizzes = storage.getSavedQuizzes();
+
     quizzes = quizzes.map((q, i)=>(
-        <div key={i} className="row">
+        <div key={i} className="row" data-question={q.id}>
             <div className="col s9">
                 <Link to={"/quiz/"+q.id} className="waves-effect waves-light btn col s12">{q.name}</Link>
             </div>
             <div className="col s3 right-align">
                 <Link to={"edit/quiz/"+q.id}><i className="material-icons">create</i></Link>
-                <Link to={"delete/quiz/"+q.id}><i className="material-icons red-text">close</i></Link>
+                <i className="material-icons red-text" onClick={()=>deleteQuiz(q.id)}>close</i>
             </div>
         </div>
     ))
+
+    const deleteQuiz = (id)=>{
+        FETCH.deleteQuiz(id, {password:prompt("pw")}).then(res=>{
+            res.id
+                ? storage.deleteByID(id) && $("div[data-question='"+id+"']").slideUp()
+                : (res.error ? M.toast({html: res.message}) :  M.toast({html: "Nothing was deleted"}))
+        })
+    }
+
     return(
         <div>
             {quizzes}

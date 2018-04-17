@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import storage from './localStorage.js'
 
 const ShareLinks = (props)=>{
@@ -9,7 +10,7 @@ const ShareLinks = (props)=>{
     return (
         <div>
             <p>Your quiz "{name}" has been saved... you can click on the link below to check it out. You can also click Share to share it with your friends on Facebook.</p>
-            <h3>NO LINK YET</h3>#
+            <div className=" col s12"><Link to={"/quiz/"+_id} className="waves-effect btn">{name}</Link></div>
             <iframe src={src} width="73" height="28" scrolling="no" frameBorder="0" allow="encrypted-media" title="facebook_share"></iframe>
         </div>
     );

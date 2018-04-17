@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Quiz from "./Quiz";
 import ResultsQuiz from "./ResultsQuiz";
-import fetch from "../fetch.js";
+import FETCH from "../fetch.js";
 
 class QuizContainer extends Component {
 	constructor({ match }) {
@@ -16,20 +16,30 @@ class QuizContainer extends Component {
 	componentDidMount(){
 		let quiz = 
 			this.state.quiz 
-				? fetch.quiz(this.state.quiz).then(res=>{
+				? FETCH.quiz(this.state.quiz).then(res=>{
+					console.log("RETURN FROM FETCH", res)
+					if(res.error) console.log(res.message)
+					res.questions = res.questions || [];
 					res.questions = res.questions.map(q=>{
 						q.category = res.name;
 						return q;
 					});
 					return res.questions;
+				}).catch(err=>{
+					console.log("RETURN FROM FETCH", err)
 				})
-				: fetch.questions(this.props.options);
+				: FETCH.questions(this.props.options);
 
 		quiz.then(questions=>{
+			console.log("RETURN FROM FETCH", questions)
+			questions = questions || [];
+			console.log( questions)
 			this.setState({questions:questions.map(q=>{
 				q.correct = undefined;
 				return q;
 			})});
+		}).catch(err=>{
+			console.log("RETURN FROM FETCH", err)
 		});
 	}
 

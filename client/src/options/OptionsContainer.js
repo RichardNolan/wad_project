@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Difficulty from "./Difficulty.js";
 import Amount from "./Amount.js";
 import Category from "./Category.js";
-import fetch from "../fetch.js";
+import FETCH from "../fetch.js";
 import { Route, Link } from "react-router-dom";
 import SavedQuizzes from "./SavedQuizzes.js";
 import M from "materialize-css/dist/js/materialize.js";
@@ -22,7 +22,8 @@ class OptionsContainer extends Component {
 	}
 	
 	componentDidMount(){
-		fetch.categories().then(categories=>{
+		FETCH.categories().then(categories=>{
+			console.log("RETURN FROM FETCH", categories)
 			this.setState({categories:categories});
 		});   
 		var elem = document.querySelector(".collapsible");

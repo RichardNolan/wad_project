@@ -7,15 +7,15 @@ import "./quiz.css";
 
 const Quiz = (props) => {
 	let questions = props.questions ? props.questions.map((q, index)=>(
-		<Question 
-			key={index}
-			questionNumber={props.current+1} 
-			question={q} 
-			onCorrect={props.onCorrect} 
-			// onIncorrect={props.onIncorrect} 
-			onMoveForward={props.onNext}
-		/>
-	)) 
+				<Question 
+					key={index}
+					questionNumber={props.current+1} 
+					question={q} 
+					onCorrect={props.onCorrect} 
+					// onIncorrect={props.onIncorrect} 
+					onMoveForward={props.onNext}
+				/>
+			)) 
 		: null;
 	return (
 		<div>

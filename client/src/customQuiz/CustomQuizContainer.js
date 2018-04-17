@@ -3,7 +3,7 @@ import NewQuestionContainer from "./NewQuestionContainer";
 import CustomQuizDetails from "./CustomQuizDetails";
 import ShareLinks from "../ShareLinks.js";
 import M from "materialize-css/dist/js/materialize.js";
-import api from "../fetch_api.js";
+import FETCH from "../fetch.js";
 
 class CustomQuizContainer extends Component {
 	constructor(){
@@ -38,8 +38,9 @@ class CustomQuizContainer extends Component {
 			M.toast({html: "Passwords don't match"});
 			return false;
 		}
-		api.saveQuiz(this.state)
+		FETCH.saveQuiz(this.state)
 			.then(data=>{
+				console.log("RETURN FROM FETCH", data)
 				this.setState({returned:data});
 			});
 	}

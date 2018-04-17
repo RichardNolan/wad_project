@@ -16,21 +16,21 @@ class QuizContainer extends Component {
 	componentDidMount(){
 		let quiz = 
 			this.state.quiz 
-				?	fetch.quiz(this.state.quiz).then(res=>{
-						res.questions = res.questions.map(q=>{
-							q.category = res.name;
-							return q
-						});
-						return res.questions;
-					})
-				: 	fetch.questions(this.props.options);
+				? fetch.quiz(this.state.quiz).then(res=>{
+					res.questions = res.questions.map(q=>{
+						q.category = res.name;
+						return q;
+					});
+					return res.questions;
+				})
+				: fetch.questions(this.props.options);
 
 		quiz.then(questions=>{
 			this.setState({questions:questions.map(q=>{
 				q.correct = undefined;
 				return q;
 			})});
-		})   
+		});
 	}
 
 	moveCurrent(amount){

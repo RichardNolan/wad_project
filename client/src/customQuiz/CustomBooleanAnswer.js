@@ -12,7 +12,8 @@ const CustomBooleanAnswer = (props) => {
 		props.setCorrect(correct);
 		props.setIncorrectBooleanAnswer([correct==="True" ? "False" : "True"]);
 	};
-	let label = <i className="material-icons prefix">forward</i>;
+	// let label = <div><i className="material-icons prefix">forward</i></div>;
+	let label = <div className="symbol ">{"\u25B6"}</div>;
 	return (
 
 		<div>

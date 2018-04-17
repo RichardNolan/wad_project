@@ -25,8 +25,9 @@ class OptionsContainer extends Component {
 		fetch.categories().then(categories=>{
 			this.setState({categories:categories});
 		});   
-		var elem = document.querySelector('.collapsible');
-		var instance = M.Collapsible.init(elem);
+		var elem = document.querySelector(".collapsible");
+		// var instance = M.Collapsible.init(elem);
+		M.Collapsible.init(elem);
 	}
 
 	setCategory(cat){
@@ -59,7 +60,7 @@ class OptionsContainer extends Component {
 	}
 
 	passOptionsBackUp(){
-		this.props.setOptions({category:this.state.category, amount:this.state.amount, difficulty:this.state.difficulty})
+		this.props.setOptions({category:this.state.category, amount:this.state.amount, difficulty:this.state.difficulty});
 	}
 
 	render () {
@@ -69,33 +70,34 @@ class OptionsContainer extends Component {
 		
 
 		return (
-			<div><SavedQuizzes/>
+			<div>
 				<ul className="collapsible">
 					<li>
-						<div className="collapsible-header"><i className="material-icons">filter_drama</i>Saved Quizzes</div>
-						<div className="collapsible-body">hghgjh</div>
+						<div className="collapsible-header"><i className="material-icons">saves</i>Saved Quizzes</div>
+						<div className="collapsible-body">
+							<SavedQuizzes/>
+						</div>
 					</li>
-					<li>
-						<div className="collapsible-header"><i className="material-icons">place</i>Second</div>
-				
+					<li className="active">
+						<div className="collapsible-header  "><i className="material-icons">extension</i>Customise a Quiz </div>
 						<div className="collapsible-body">
 							<div>
-								<Link className="waves-effect waves-light btn " to="/options/category">Category</Link>
-								<Link className="waves-effect waves-light btn " to="/options/difficulty">Difficulty</Link>
-								<Link className="waves-effect waves-light btn " to="/options/amount">Amount</Link>
+								<Link className="waves-effect btn" to="/options/category">Category</Link>
+								<Link className="waves-effect btn" to="/options/difficulty">Difficulty</Link>
+								<Link className="waves-effect btn" to="/options/amount">Amount</Link>
 							</div>
-						{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>
-						<Amount setAmount={this.setAmount.bind(this)} chosen={this.state.amount}/>
-						<Category setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} /> */}
-						<Route path="/options/category" render={(props) => <Category {...props} setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} />} />
-						<Route path="/options/difficulty" render={(props) => <Difficulty {...props} setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty} />} />
-						<Route path="/options/amount" render={(props) => <Amount {...props} setAmount={this.setAmount.bind(this)} chosen={this.state.amount} />} />
-						<Link to="/quiz" 
-							className="waves-effect waves-light btn answer"
-							onClick={this.passOptionsBackUp.bind(this)}
-						>Finished </Link>
-						{/* <button onClick={this.passOptionsBackUp.bind(this)} >Finished</button> */}
-				</div>
+							{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>
+							<Amount setAmount={this.setAmount.bind(this)} chosen={this.state.amount}/>
+							<Category setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} /> */}
+							<Route path="/options/category" render={(props) => <Category {...props} setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} />} />
+							<Route path="/options/difficulty" render={(props) => <Difficulty {...props} setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty} />} />
+							<Route path="/options/amount" render={(props) => <Amount {...props} setAmount={this.setAmount.bind(this)} chosen={this.state.amount} />} />
+							<Link to="/quiz" 
+								className="waves-effect waves-light btn answer"
+								onClick={this.passOptionsBackUp.bind(this)}
+							>Finished </Link>
+							{/* <button onClick={this.passOptionsBackUp.bind(this)} >Finished</button> */}
+						</div>
 					</li>
 				</ul>
 			</div>

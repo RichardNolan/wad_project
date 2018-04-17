@@ -94,7 +94,7 @@ module.exports = (()=>{
 				return new Promise((resolve, reject)=>{
 					collection && collection.updateOne({_id:mongoID(id)}, {$set: obj}).then(response=>{
 						if(response.modifiedCount===0) reject({error:true, message:"Nothing was updated"})
-						else resolve({data:response.ops[0]})
+						else resolve({data:response})
 					});
 				})
 			}

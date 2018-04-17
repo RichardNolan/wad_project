@@ -74,52 +74,63 @@ class NewQuestionContainer extends Component {
 	}
 
 	cleanQuestionForm(){
-
-			this.setState({
-				correct_answer:"",
-				difficulty:"easy",
-				incorrect_answers:["", "", ""],
-				possible_answers:[],
-				question:"",
-				type:"multiple",
-				problems:[]
-			});
-			
-		
+		this.setState({
+			correct_answer:"",
+			difficulty:"easy",
+			incorrect_answers:["", "", ""],
+			possible_answers:[],
+			question:"",
+			type:"multiple"
+		});		
 	}
 
-	addQuestion(){
-		let problems = [];
+	isValidQuestion(){
+			// VALIDATION ON BLANK QUESTION AND CORRECT ANSWER
+			if(this.state.question===""){
+				M.toast({html: "You didn't enter a question" });
+				return false;
+			}
+			if(this.state.correct_answer===""){
+				M.toast({html: "You didn't enter a correct answer" })
+				return false;
+			}
+	
+			// VALIDATION ON BLANK WRONG ANSWERS
+			if(this.state.incorrect_answers[0]===""){
+				M.toast({html: "Missing incorrect answer 1"});
+				return false;
+			}
+			if(this.state.incorrect_answers[1]===""){
+				M.toast({html: "Missing incorrect answer 2"});
+				return false;
+			}
+			if(this.state.incorrect_answers[2]===""){
+				M.toast({html: "Missing incorrect answer 3"});
+				return false;
+			}
+			return true;
+	}
 
-		// VALIDATION ON BLANK QUESTION AND CORRECT ANSWER
-		if(this.state.question===""){
-			M.toast({html: "You didn't enter a question" });
-			return false;
-		}
-		if(this.state.correct_answer===""){
-			M.toast({html: "You didn't enter a correct answer" })
-			return false;
-		}
-
-		// VALIDATION ON BLANK WRONG ANSWERS
-		if(this.state.incorrect_answers[0]===""){
-			M.toast({html: "Missing incorrect answer 1"});
-			return false;
-		}
-		if(this.state.incorrect_answers[1]===""){
-			M.toast({html: "Missing incorrect answer 2"});
-			return false;
-		}
-		if(this.state.incorrect_answers[2]===""){
-			M.toast({html: "Missing incorrect answer 3"});
-			return false;
-		}
-
-		this.setState({problems},()=>{
+	addQuestion(cb){
+		if(this.isValidQuestion()){
 			let x = this.props.addQuestion(this.state);
-			if(x) this.cleanQuestionForm();
-		});
+			if(x){
+				this.cleanQuestionForm();
+				if(typeof cb === "function") cb();
+			}
+		}
+	}
 
+	finishedQuiz(){
+		if(this.state.possible_answers.length>0 || this.state.question!==""){
+			M.toast({html: "Trying to save your last question"});
+			this.addQuestion(()=>{
+				this.props.onFinishedQuiz();
+			});
+		}else{
+			this.props.onFinishedQuiz();
+		}
+		
 	}
 
 	render () {
@@ -179,7 +190,9 @@ class NewQuestionContainer extends Component {
 
 				<a 
 					className="waves-effect waves-light btn answer"
-					onClick={this.props.onFinishedQuiz}
+					//TEST THE LINE COMMENTED...
+					onClick={this.finishedQuiz.bind(this)}
+					// onClick={this.props.onFinishedQuiz}
 				>Finished Quiz</a>
 				{/* <button onClick={this.props.onFinishedQuiz}>Finished Quiz</button> */}
 			</div>

@@ -13,8 +13,10 @@ module.exports = (()=>{
             ? res.send({error:true, message:"There was an error connecting"})
             : next()
     }
+    
     const _attachCORSHeaders = (req, res, next)=> {
         res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
     }

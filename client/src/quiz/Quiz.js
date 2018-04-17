@@ -22,14 +22,14 @@ const Quiz = (props) => {
 			<a 
 				className="waves-effect waves-light btn "
 				onClick={props.onPrevious}
-			>&larr;</a>
+			>&#9666;</a>
 			{/* <button onClick={props.onPrevious}>Previous</button> */}
 			<Score questions={props.questions} />
 			{/* <button onClick={props.onNext}>Next</button> */}
 			<a 
 				className="waves-effect waves-light btn "
 				onClick={props.onNext}
-			>&rarr;</a>
+			>&#9656;</a>
 
 			{questions ? questions[props.current] : null}
 

@@ -7,10 +7,6 @@ module.exports = (() => {
         return savedQuizzes;
     }    
 
-   const  _getSavedQuizzes = ()=>{
-        return _SAVED();
-    }
-
     const _saveQuiz = (name, id)=>{
         let savedQuizzes = _SAVED()
         if(typeof savedQuizzes === "object") savedQuizzes.push({name:name, id:id});
@@ -18,8 +14,21 @@ module.exports = (() => {
         localStorage.setItem('quizzes', JSON.stringify(savedQuizzes));
     }
     
+    const _updateName = (name,id)=>{
+        let index = -1
+        let quizzes = _SAVED();
+        quizzes.forEach((q,i)=>{
+            if(q.id===id) index = i;
+        });
+        if(index>=0) quizzes.splice(index,1);
+        if(typeof quizzes === "object") quizzes.push({name:name, id:id});
+        else quizzes = [{name:name, id:id}]
+        localStorage.setItem('quizzes', JSON.stringify(quizzes));
+    }
+
     return {
-        getSavedQuizzes: ()=> _getSavedQuizzes(),
-        saveQuiz: (name, id)=> _saveQuiz(name, id)
+        getSavedQuizzes: ()=> _SAVED(),
+        saveQuiz: (name, id)=> _saveQuiz(name, id),
+        updateName: (name, id)=> _updateName(name, id)
     };
 })();

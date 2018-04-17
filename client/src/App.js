@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import QuizContainer from "./quiz/QuizContainer";
 import OptionsContainer from "./options/OptionsContainer";
 import CustomQuizContainer from "./customQuiz/CustomQuizContainer";
-import { Route, Link, Redirect } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
+import EditQuizContainer from "./customQuiz/EditQuizContainer.js";
 
 import "./App.css";
 
@@ -16,23 +17,21 @@ const Home = ()=>{
 
 class App extends Component {
 	constructor(){
-		super()
+		super();
 		this.state={
 			amount:20,
 			difficulty:"",
-			category:"9"
-		}
+			category:""
+		};
 	}
 	
 	setOptions(options){
-		this.setState(options)
-		// REDIRECT SOMEHOW TO QUIZ
-		return <Redirect push to="/quiz" />
+		this.setState(options);
 	}
 
-
 	render() {
-		let options = {category:this.state.category, amount:this.state.amount, difficulty:this.state.difficulty}
+		let options = {category:this.state.category, amount:this.state.amount, difficulty:this.state.difficulty};
+		
 		return (
 			<div className="App">
 				<div className="navbar-fixed">
@@ -42,7 +41,7 @@ class App extends Component {
 						</div>
 						<div className="nav-content">
 							<ul className="tabs tabs-transparent">
-								<li className="tab"><Link to="/quiz">Quick Quiz</Link></li>
+								<li className="tab"><Link to="/quickquiz">Quick Quiz</Link></li>
 								<li className="tab"><Link to="/options">Choose Quiz</Link></li>
 								<li className="tab"><Link to="/custom">Create Quiz</Link></li>
 							</ul>
@@ -51,10 +50,12 @@ class App extends Component {
 				</div>
 				<main>
 					<Route exact path="/" component={Home} />
+					<Route exact path="/quickquiz" render={(props) => <QuizContainer {...props} />} />
 					<Route exact path="/quiz" render={(props) => <QuizContainer {...props} options={options} />} />
 					<Route path="/quiz/:id" render={(props) => <QuizContainer {...props} options={options} />} />
 					<Route path="/options" render={(props) => <OptionsContainer {...props} setOptions={this.setOptions.bind(this)} />} />	
-					<Route path="/custom" component={CustomQuizContainer} />	
+					<Route path="/custom" component={CustomQuizContainer} />
+					<Route path="/edit/quiz/:id" component={EditQuizContainer}/>	
 				</main>
 			</div>
 		);

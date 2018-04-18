@@ -1,0 +1,28 @@
+       
+    .hamburger{
+        position: fixed;
+        z-index:5005;
+        width:40px;
+        height:40px;
+        right:10px;
+        top:10px;
+        background-color: #00A7B6;
+        border-radius: 50%;
+        transition: all .5s cubic-bezier(0.98, 2.04, 0.65, 0.63);
+    }
+        .line{
+            position: absolute;
+            width:20px;
+            height:2px;
+            background-color: white;
+            left:10px;
+            top:19px;
+            transition: all .3s;
+            transform-origin: 10px 1px;
+        }
+            .top-line{
+                top:13px;
+            }
+            .bottom-line{
+                top:25px;
+            }

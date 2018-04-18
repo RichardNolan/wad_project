@@ -1,0 +1,26 @@
+{
+  "name": "wad_project",
+  "version": "0.0.1",
+  "description": "Ara and Richards WAD Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RichardNolan/wad_project.git"
+  },
+  "author": "Richard Nolan and Araceli Lopez Gomez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RichardNolan/wad_project/issues"
+  },
+  "homepage": "https://github.com/RichardNolan/wad_project#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "jade": "^1.11.0",
+    "mongodb": "^3.0.6",
+    "node-fetch": "^2.1.2",
+    "nodemon": "^1.17.3"
+  }
+}

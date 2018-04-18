@@ -8,7 +8,7 @@ module.exports = (()=>{
 /** ROUTE FUNCTIONS MOVED DOWN HERE ONLY FOR CLARITY */
     // GET ROOT
     const _getRoot = (req, res, next)=>{
-        res.send("Homepage");
+        res.render("index.html");
         next();
     }
 

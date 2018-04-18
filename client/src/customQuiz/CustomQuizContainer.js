@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import NewQuestionContainer from "./NewQuestionContainer";
 import CustomQuizDetails from "./CustomQuizDetails";
-import ShareLinks from "../ShareLinks.js";
+
+import CustomQuizFinished from "./CustomQuizFinished.js";
+
 import M from "materialize-css/dist/js/materialize.js";
 import FETCH from "../fetch.js";
+import storage from "../localStorage.js";
 
 class CustomQuizContainer extends Component {
 	constructor(){
@@ -43,6 +46,7 @@ class CustomQuizContainer extends Component {
 			.then(data=>{
 				console.log("RETURN FROM FETCH", data)
 				this.setState({returned:data});
+				storage.saveQuiz(data.name, data._id);
 			});
 	}
 
@@ -103,7 +107,7 @@ class CustomQuizContainer extends Component {
 			/>;
 		return (
 			<div>
-				{this.state.returned ? <ShareLinks quiz={this.state.returned}/> : QuizDetailsQuestions}				
+				{this.state.returned ? <CustomQuizFinished text={this.state.returned.name} link={"/quiz/"+this.state.returned._id} /> : QuizDetailsQuestions}				
 			</div>
 		);
 	}

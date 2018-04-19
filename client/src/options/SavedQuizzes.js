@@ -10,12 +10,13 @@ const SavedQuizzes = ()=>{
 	let quizzes = storage.getSavedQuizzes();
 
 	quizzes = quizzes.map((q, i)=>(
-		<div key={i} className="row" data-question={q.id}>
-			<div className="col s9">
+		<div key={i} className="row center" data-quiz={q.id}>
+			<div className="col s7 m9">
 				<Link to={"/quiz/"+q.id} className="waves-effect btn col s12">{q.name}</Link>
 			</div>
-			<div className="col s3 right-align">
-				<Link to={"edit/quiz/"+q.id}><i className="material-icons">create</i></Link>
+			<div className="col s5 m3">
+				<i className="material-icons teal-text ">share</i>
+				<Link to={"edit/quiz/"+q.id}><i className="material-icons ">edit</i></Link>
 				<i className="material-icons red-text" onClick={()=>deleteQuiz(q.id)}>close</i>
 			</div>
 		</div>
@@ -24,7 +25,7 @@ const SavedQuizzes = ()=>{
 	const deleteQuiz = (id)=>{
 		FETCH.deleteQuiz(id, {password:prompt("pw")}).then(res=>{
 			res.id
-				? storage.deleteByID(id) && $("div[data-question='"+id+"']").slideUp()
+				? storage.deleteByID(id) && $("div[data-quiz='"+id+"']").slideUp()
 				: (res.error ? M.toast({html: res.message}) :  M.toast({html: "Nothing was deleted"}));
 		});
 	};

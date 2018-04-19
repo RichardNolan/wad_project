@@ -3,6 +3,7 @@ import CustomBooleanAnswer from "./CustomBooleanAnswer.js";
 import CustomMultipleAnswer from "./CustomMultipleAnswer.js";
 import DifficultyStars from "./DifficultyStars.js";
 import M from "materialize-css/dist/js/materialize.js";
+import FETCH from "../fetch.js";
 // import "../quiz/question.css";
 
 class NewQuestionContainer extends Component {
@@ -127,10 +128,16 @@ class NewQuestionContainer extends Component {
 	updateQuestion(cb){
 		if(this.isValidQuestion()){
 			console.log("UPDATE THE QUESTION");
-			// api.saveQuiz(this.state)
-			// .then(data=>{
-			// 	this.setState({returned:data});
-			// });
+			let obj = Object.assign({}, this.state);
+			delete obj._id;
+			obj.password = prompt("Password");
+			console.log(obj)
+			FETCH.updateQuestion(this.state._id, obj)
+				.then(data=>{
+					console.log("RETURN FROM FETCH", data);
+					M.toast({html: "The question has been updated"});
+					this.props.closeEditQuestion();
+				});
 		}
 	}
 

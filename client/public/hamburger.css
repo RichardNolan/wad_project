@@ -2,11 +2,11 @@
     .hamburger{
         position: fixed;
         z-index:5005;
-        width:40px;
-        height:40px;
+        width:35px;
+        height:35px;
         right:10px;
         top:10px;
-        background-color: #00A7B6;
+        background-color: #26a69a;
         border-radius: 50%;
         transition: all .5s cubic-bezier(0.98, 2.04, 0.65, 0.63);
     }
@@ -15,14 +15,14 @@
             width:20px;
             height:2px;
             background-color: white;
-            left:10px;
-            top:19px;
+            left:7px;
+            top:16px;
             transition: all .3s;
             transform-origin: 10px 1px;
         }
             .top-line{
-                top:13px;
+                top:10px;
             }
             .bottom-line{
-                top:25px;
+                top:22px;
             }

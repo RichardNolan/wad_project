@@ -4,7 +4,7 @@ import OptionsContainer from "./options/OptionsContainer";
 import CustomQuizContainer from "./customQuiz/CustomQuizContainer";
 import { Route, Link } from "react-router-dom";
 import EditQuizContainer from "./customQuiz/EditQuizContainer.js";
-import logo from "./logowhite.png";
+import logo from "./logo.png";
 import "./App.css";
 
 const Home = ()=>{
@@ -56,6 +56,7 @@ class App extends Component {
 					<Route path="/options" render={(props) => <OptionsContainer {...props} setOptions={this.setOptions.bind(this)} />} />	
 					<Route path="/custom" component={CustomQuizContainer} />
 					<Route path="/edit/quiz/:id" component={EditQuizContainer}/>	
+				
 				</main>
 			</div>
 		);

@@ -23,7 +23,6 @@ class OptionsContainer extends Component {
 	
 	componentDidMount(){
 		FETCH.categories().then(categories=>{
-			console.log("RETURN FROM FETCH", categories)
 			this.setState({categories:categories});
 		});   
 		var elem = document.querySelector(".collapsible");

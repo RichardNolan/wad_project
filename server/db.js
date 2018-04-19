@@ -115,7 +115,7 @@ module.exports = (()=>{
 	const _deleteMany = (obj, collection)=>{
 		return new Promise((resolve, reject)=>{					
 			collection && collection.deleteMany(obj, (err, data)=>{
-				if(err || data.deletedCount===0) reject({error:true, message:"Bulk delete failed"})
+				if(err) reject({error:true, message:"Bulk delete failed"})
 				else resolve({id: obj.quiz_id, deleted: data.deletedCount});
 			})
 		})

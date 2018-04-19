@@ -80,7 +80,12 @@ class CustomQuizContainer extends Component {
 	}
 
 	finishedQuiz(){
-		this.setState({finished:true});
+		if(this.state.questions.length>0){
+			this.setState({finished:true});
+		}else{
+			//TOAST
+			console.log("YOU MUST HAVE AT LEAST 1 QUESTION");
+		}
 	}
 
 	onResetNextQuestion(){

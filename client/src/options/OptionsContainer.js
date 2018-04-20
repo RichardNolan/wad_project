@@ -82,18 +82,25 @@ class OptionsContainer extends Component {
 					<li >
 						<div className="collapsible-header teal white-text "><i className="material-icons  ">extension</i>CUSTOMIZE A QUIZ </div>
 						<div className="collapsible-body">
-							<div className="row">							
+							<div className="nav-content">
+								<ul className="tabs teal darken-2">
+									<li className="tab"><Link to="/options/category" className="white-text">Category</Link></li>
+									<li className="tab"><Link to="/options/difficulty" className="white-text">Difficulty</Link></li>
+									<li className="tab"><Link to="/options/amount" className="white-text">Amount</Link></li>
+								</ul>
+							</div>
+							{/* <div className="row">							
 								<Link to="/quiz" 
 									className="waves-effect waves-light btn answer s10 offset-s1"
 									onClick={this.passOptionsBackUp.bind(this)}
 								>Start the Quiz</Link>
-								{/* <button onClick={this.passOptionsBackUp.bind(this)} >Finished</button> */}
+								<button onClick={this.passOptionsBackUp.bind(this)} >Finished</button>
 								<div className="row">
 									<Link className="waves-effect btn answer col s10 m2 offset-s1 offset-m2" to="/options/category">Category</Link>
 									<Link className="waves-effect btn answer col s10 m2 offset-s1 offset-m1" to="/options/difficulty">Difficulty</Link>
 									<Link className="waves-effect btn answer col s10 m2 offset-s1 offset-m1" to="/options/amount">Amount</Link>
 								</div>
-							</div>
+							</div> */}
 							
 							{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>
 							<Amount setAmount={this.setAmount.bind(this)} chosen={this.state.amount}/>
@@ -102,6 +109,11 @@ class OptionsContainer extends Component {
 							<Route path="/options/difficulty" render={(props) => <Difficulty {...props} setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty} />} />
 							<Route path="/options/amount" render={(props) => <Amount {...props} setAmount={this.setAmount.bind(this)} chosen={this.state.amount} />} />
 							
+							<div className="fixed-action-btn">
+								<Link to="/quiz" className="btn-floating btn-large red waves-effect waves-light "
+									onClick={this.passOptionsBackUp.bind(this)}
+								><i className="large material-icons">done</i></Link>
+							</div>
 						</div>
 					</li>
 				</ul>

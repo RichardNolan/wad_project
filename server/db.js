@@ -203,7 +203,7 @@ const _checkPassword = (quiz_id, password)=>{
 	return new Promise((resolve, reject)=>{
 		_findByID(quiz_id, _QUIZ)
 			.then(data=> {
-				console.log(data.password,password)
+				// console.log(data.password,password)
 				data.password===password ? resolve(true) : reject({error:true, message:"PASSWORD FAILED"})
 			})
 			.catch(err=> reject(err))

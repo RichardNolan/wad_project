@@ -106,7 +106,7 @@ module.exports = (()=>{
 
     // DELETE CUSTOM/QUIZ
     const _deleteCustomQuiz = (req,res,next)=>{
-        console.log(req.params.id, req.body)
+        // console.log(req.params.id, req.body)
         db.deleteQuiz(req.params.id, req.body).then(data=>respond(data,res)).catch(err=>{res.send({error:true, message:"No Quizzes deleted"})});      
     }
 

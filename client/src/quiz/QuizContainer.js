@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Quiz from "./Quiz";
 import ResultsQuiz from "./ResultsQuiz";
 import FETCH from "../fetch.js";
+import M from "materialize-css/dist/js/materialize.js";
 
 class QuizContainer extends Component {
 	constructor({ match }) {
@@ -17,7 +18,7 @@ class QuizContainer extends Component {
 		let quiz = 
 			this.state.quiz 
 				? FETCH.quiz(this.state.quiz).then(res=>{
-					console.log("RETURN FROM FETCH", res)
+					// console.log("RETURN FROM FETCH", res)
 					if(res.error) console.log(res.message)
 					res.questions = res.questions || [];
 					res.questions = res.questions.map(q=>{
@@ -26,20 +27,22 @@ class QuizContainer extends Component {
 					});
 					return res.questions;
 				}).catch(err=>{
-					console.log("RETURN FROM FETCH", err)
+					M.toast({html: err});
+					// console.log("RETURN FROM FETCH", err)
 				})
 				: FETCH.questions(this.props.options);
 
 		quiz.then(questions=>{
-			console.log("RETURN FROM FETCH", questions)
+			// console.log("RETURN FROM FETCH", questions)
 			questions = questions || [];
-			console.log( questions)
+			// console.log( questions)
 			this.setState({questions:questions.map(q=>{
 				q.correct = undefined;
 				return q;
 			})});
 		}).catch(err=>{
-			console.log("RETURN FROM FETCH", err)
+			M.toast({html: err});
+			// console.log("RETURN FROM FETCH", err)
 		});
 	}
 

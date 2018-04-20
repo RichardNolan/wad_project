@@ -19,7 +19,11 @@ class EditQuizContainer extends Component {
 
 	componentDidMount(){
 		FETCH.quiz(this.state.id).then(res=>{
-			this.setState({name:res.name, questions:res.questions });
+			console.log(res)
+			if(res.error) throw new Error(res.message)
+			else this.setState({name:res.name, questions:res.questions });
+		}).catch(err=>{
+			M.toast({html: "Version 2 will have a graceful crash... for now this is it"});
 		});
 	}
 
@@ -30,10 +34,13 @@ class EditQuizContainer extends Component {
 	updateName(){
 		FETCH.updateName(this.state.id, {name:this.state.name, password:prompt("pw")})
 			.then(res=>{
+				if(res.error) throw new Error(res.message)
 				if(res.data){
 					storage.updateName(this.state.name, this.state.id);
 					M.toast({html: "You have updated the quiz name"});
 				}
+			}).catch(err=>{
+				M.toast({html: "Version 2 will have a graceful crash... for now this is it"});
 			});
 	}
 
@@ -45,9 +52,12 @@ class EditQuizContainer extends Component {
 		let passwd=prompt("pw");
 		FETCH.deleteQuestion(id, {quiz_id:this.state.id, password:passwd})
 			.then(res=>{
+				if(res.error) throw new Error(res.message)
 				res.id
 					? $("div[data-question='"+id+"']").slideUp()
 					: (res.error ? M.toast({html: res.message}) :  M.toast({html: "Nothing was deleted"}));
+			}).catch(err=>{
+				M.toast({html: "Version 2 will have a graceful crash... for now this is it"});
 			});
 	}
 	

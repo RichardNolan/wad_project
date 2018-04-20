@@ -44,7 +44,7 @@ class CustomQuizContainer extends Component {
 		}
 		FETCH.saveQuiz(this.state)
 			.then(data=>{
-				console.log("RETURN FROM FETCH", data)
+				// console.log("RETURN FROM FETCH", data)
 				this.setState({returned:data});
 				storage.saveQuiz(data.name, data._id);
 			});
@@ -84,7 +84,8 @@ class CustomQuizContainer extends Component {
 			this.setState({finished:true});
 		}else{
 			//TOAST
-			console.log("YOU MUST HAVE AT LEAST 1 QUESTION");
+			// console.log("YOU MUST HAVE AT LEAST 1 QUESTION");
+			M.toast({html: "You must have at least one question to save a quiz"});
 		}
 	}
 

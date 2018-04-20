@@ -30,13 +30,10 @@ class EditQuizContainer extends Component {
 	updateName(){
 		FETCH.updateName(this.state.id, {name:this.state.name, password:prompt("pw")})
 			.then(res=>{
-				console.log("RETURN FROM FETCH", res);
 				if(res.data){
 					storage.updateName(this.state.name, this.state.id);
 					M.toast({html: "You have updated the quiz name"});
 				}
-					
-				//MAYBE AN ERROR
 			});
 	}
 
@@ -53,9 +50,11 @@ class EditQuizContainer extends Component {
 					: (res.error ? M.toast({html: res.message}) :  M.toast({html: "Nothing was deleted"}));
 			});
 	}
+	
 	closeEditQuestion(){
 		this.setState({editid:null});
 	}
+	
 	render () {
 		return (
 			<div>

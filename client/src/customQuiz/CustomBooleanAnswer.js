@@ -1,4 +1,5 @@
 import React from "react";
+import "./customQuiz.css";
 
 const CustomBooleanAnswer = (props) => {
 
@@ -20,13 +21,13 @@ const CustomBooleanAnswer = (props) => {
 			<div className="card col s10 offset-s1 ">
 				<div className="card-content">
 					<a 
-						className="waves-effect btn answer"
+						className="btn waves-effect teal lighten-4 black-text waves-teal answer"
 						onClick={clickBooleanHandler} 				
 						answer="True"
 					>{props.correct_answer==="True" ? label : null} True</a>
 					<br/>
 					<a
-						className="waves-effect btn answer"
+						className="btn waves-effect teal lighten-4 answer waves-teal black-text "
 						onClick={clickBooleanHandler} 				
 						answer="False"
 					>{props.correct_answer==="False" ? label : null} False</a>

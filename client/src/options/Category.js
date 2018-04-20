@@ -10,13 +10,16 @@ const Category = (props) => {
 	};
 
 	categories=categories.map((cat,index)=>{
+		let trickCat=cat.name;
+		let catName= trickCat.replace(/entertainment:/i, " ");
+		catName= catName.replace(/science:/i, " ");
 		return (
 			<div key={index}>
 				<a 
-					className="waves-effect btn answer"
+					className="waves-effect btn answer col s12 m6 l3"
 					onClick={clickHandler} 				
 					catid={cat.id}
-				>{cat.name}</a>
+				>{catName}</a>
 			</div>
 		);
 	});

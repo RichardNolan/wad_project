@@ -125,19 +125,20 @@ class NewQuestionContainer extends Component {
 			}
 		}
 	}
+
 	updateQuestion(cb){
 		if(this.isValidQuestion()){
-			console.log("UPDATE THE QUESTION");
 			let obj = Object.assign({}, this.state);
 			delete obj._id;
 			obj.password = prompt("Password");
-			console.log(obj)
 			FETCH.updateQuestion(this.state._id, obj)
 				.then(data=>{
 					console.log("RETURN FROM FETCH", data);
 					M.toast({html: "The question has been updated"});
 					this.props.closeEditQuestion();
-				});
+					//this.setState(); needs a mount 
+					//window.location.reload();   runs but jquery creator pops wrong
+				}); 
 		}
 	}
 
@@ -158,60 +159,6 @@ class NewQuestionContainer extends Component {
 		
 		return (
 			<div className="row">
-				<div className="card col s10 offset-s1">
-					<div className="input-field">
-						<div className="row">
-							<DifficultyStars onDifficultyChange={this.onDifficultyChange.bind(this)}/>
-							<div className="radio">
-								<label>
-									<input type="radio" name="type" value="boolean" checked={this.state.type === "boolean"} onChange={this.handleRadioChange.bind(this)}/><span>True/False</span>
-								</label>
-								<label>
-									<input type="radio" name="type" value="multiple" checked={this.state.type === "multiple"} onChange={this.handleRadioChange.bind(this)}/> <span>4 possible answers</span>
-								</label>
-							</div>
-						</div>
-						<div className="row">
-							<div className="input-field col s10 offset-s1">
-								<i className="material-icons prefix">help_outline</i>
-								<input type="text" id="question"  value={this.state.question} onChange={this.handleQuestion.bind(this)}/>
-								<label htmlFor="question" className={this.props.question ? "active":null}>Input question here</label>
-							</div>
-						</div>
-						<div className="row">
-							<div>
-								{this.state.type==="boolean"
-									? <CustomBooleanAnswer 
-										setIncorrectBooleanAnswer={this.setIncorrectBooleanAnswer.bind(this)} 
-										setCorrect={this.setCorrect.bind(this)} 
-										correct_answer={this.state.correct_answer} 
-									  />
-									: <CustomMultipleAnswer 
-										correct_answer={this.state.correct_answer} 
-										incorrect_answers={this.state.incorrect_answers}
-										setIncorrectAnswers={this.setIncorrectAnswers.bind(this)} 
-										setCorrect={this.setCorrect.bind(this)}
-										// problems={this.state.problems}
-										question={this.props.question}
-									  />
-								}
-								
-							</div>
-						</div>	
-						{this.props.question
-							? <a 
-								className="waves-effect btn answer"
-								onClick={this.updateQuestion.bind(this)}
-							>Update Question</a>
-							:<a 
-								className="waves-effect btn answer "
-								onClick={this.addQuestion.bind(this)}
-							>Add Question</a>}		
-						
-						{/* <button onClick={this.addQuestion.bind(this)}>Add Question</button> */}
-						
-					</div>
-				</div>
 				{this.props.question   // if we are passsing question, we are updating
 					?null
 					:<a 
@@ -220,6 +167,56 @@ class NewQuestionContainer extends Component {
 						// onClick={this.props.onFinishedQuiz}
 					>Finished Quiz</a>
 				}
+				<div className="card col s10 offset-s1 row">
+					<div className="input-field col s10 offset-s1">
+						<i className="material-icons prefix">help_outline</i>
+						<input type="text" id="question"  value={this.state.question} onChange={this.handleQuestion.bind(this)}/>
+						<label htmlFor="question" className={this.props.question ? "active":null}>Input question here</label>
+					</div>
+					<DifficultyStars onDifficultyChange={this.onDifficultyChange.bind(this)}/>
+					<div className="radio row">
+						<label>
+							<input type="radio" name="type" value="boolean" checked={this.state.type === "boolean"} onChange={this.handleRadioChange.bind(this)}/>
+							<span>True/False</span>
+						</label>
+						<label>
+							<input type="radio" name="type" value="multiple" checked={this.state.type === "multiple"} onChange={this.handleRadioChange.bind(this)}/> 
+							<span>4 possible answers</span>
+						</label>
+					</div>
+					{this.state.type==="boolean"
+						? <CustomBooleanAnswer 
+							setIncorrectBooleanAnswer={this.setIncorrectBooleanAnswer.bind(this)} 
+							setCorrect={this.setCorrect.bind(this)} 
+							correct_answer={this.state.correct_answer} 
+						/>
+						: <CustomMultipleAnswer 
+							correct_answer={this.state.correct_answer} 
+							incorrect_answers={this.state.incorrect_answers}
+							setIncorrectAnswers={this.setIncorrectAnswers.bind(this)} 
+							setCorrect={this.setCorrect.bind(this)}
+							// problems={this.state.problems}
+							question={this.props.question}
+						/>
+					}
+						
+					{this.props.question
+						? <div className="row">
+							<a 
+								className="waves-effect btn answer col s5 offset-s1"
+								onClick={this.updateQuestion.bind(this)}
+							>Update Question</a>
+							<a 
+								className="waves-effect btn answer col s4 offset-s1"
+								onClick={this.props.closeEditQuestion.bind(this)}
+							>Cancel</a>
+						</div>
+						:<a 
+							className="waves-effect btn answer "
+							onClick={this.addQuestion.bind(this)}
+						>Add Question</a>
+					}	{/* <button onClick={this.addQuestion.bind(this)}>Add Question</button> */}	
+				</div>
 			</div>
 		);
 	}

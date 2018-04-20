@@ -71,36 +71,37 @@ class OptionsContainer extends Component {
 
 		return (
 			<div>
+				<br/>
 				<ul className="collapsible">
 					<li>
-						<div className="collapsible-header"><i className="material-icons">saves</i>Saved Quizzes</div>
+						<div className="collapsible-header"><i className="material-icons teal-text">saves</i>SAVED QUIZZES</div>
 						<div className="collapsible-body">
 							<SavedQuizzes/>
 						</div>
 					</li>
-					<li className="active">
-						<div className="collapsible-header  "><i className="material-icons">extension</i>Customise a Quiz </div>
+					<li >
+						<div className="collapsible-header  "><i className="material-icons teal-text ">extension</i>CUSTOMIZE A QUIZ </div>
 						<div className="collapsible-body">
 							<div className="row">
-								<div className="card col s10 offset-s1 ">
-									<div className="card-content">
-										<Link className="waves-effect btn answer" to="/options/category">Category</Link>
-										<Link className="waves-effect btn answer" to="/options/difficulty">Difficulty</Link>
-										<Link className="waves-effect btn answer" to="/options/amount">Amount</Link>
-									</div>
+								<div className="row">
+									<Link className="waves-effect btn answer col s12 m2 offset-m2" to="/options/category">Category</Link>
+									<Link className="waves-effect btn answer col s12 m2 offset-m1" to="/options/difficulty">Difficulty</Link>
+									<Link className="waves-effect btn answer col s12 m2 offset-m1" to="/options/amount">Amount</Link>
 								</div>
+								<Link to="/quiz" 
+									className="waves-effect waves-light btn answer s10 offset-s1"
+									onClick={this.passOptionsBackUp.bind(this)}
+								>Start the Quiz</Link>
+								{/* <button onClick={this.passOptionsBackUp.bind(this)} >Finished</button> */}
 							</div>
+							
 							{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>
 							<Amount setAmount={this.setAmount.bind(this)} chosen={this.state.amount}/>
 							<Category setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} /> */}
 							<Route path="/options/category" render={(props) => <Category {...props} setCategory={this.setCategory.bind(this)} chosen={this.state.category} categories={this.state.categories} />} />
 							<Route path="/options/difficulty" render={(props) => <Difficulty {...props} setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty} />} />
 							<Route path="/options/amount" render={(props) => <Amount {...props} setAmount={this.setAmount.bind(this)} chosen={this.state.amount} />} />
-							<Link to="/quiz" 
-								className="waves-effect waves-light btn answer"
-								onClick={this.passOptionsBackUp.bind(this)}
-							>Finished </Link>
-							{/* <button onClick={this.passOptionsBackUp.bind(this)} >Finished</button> */}
+							
 						</div>
 					</li>
 				</ul>

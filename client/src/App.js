@@ -5,7 +5,7 @@ import CustomQuizContainer from "./customQuiz/CustomQuizContainer";
 import { Route, Link } from "react-router-dom";
 import EditQuizContainer from "./customQuiz/EditQuizContainer.js";
 
-import logo from "./logowhite.png";
+import logo from "./logo.png";
 import "./App.css";
 
 const Home = ()=>{

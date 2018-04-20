@@ -12,15 +12,14 @@ const SavedQuizzes = ()=>{
 
 	quizzes = quizzes.map((q, i)=>(
 		<div key={i} className="row center" data-quiz={q.id}>
-			<div className="col s6 m8">
+			<div className="col s7 m9">
 				<Link to={"/quiz/"+q.id} className="waves-effect btn col s12">{q.name}</Link>
 			</div>
-			<div className="col s3 m2">
+
+			<div className="col s5 m3">
 				<ShareLinks text="I challenge you to a Quiz-Off" link={"quiz/"+q.id} />
-			</div>
-			<div className="col s3 m2">
 				<Link to={"edit/quiz/"+q.id}><i className="material-icons">edit</i></Link>
-				<i className="material-icons red-text" onClick={()=>deleteQuiz(q.id)}>close</i>
+				<i className="material-icons red-text pointer" onClick={()=>deleteQuiz(q.id)}>close</i>
 			</div>
 		</div>
 	));

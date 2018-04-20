@@ -1,0 +1,9 @@
+.social-menu{
+    position:absolute;
+    text-align: left; 
+}
+
+.floating-menu{
+    background-color: aliceblue;
+    padding:8px;
+}

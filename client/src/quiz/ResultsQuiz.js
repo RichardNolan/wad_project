@@ -19,8 +19,8 @@ const ResultsQuiz = (props) => {
 		
 	return (
 		<div>
-			<h3><Score questions={props.questions} /></h3>
-			<h3>Review</h3>
+			<h4><Score questions={props.questions} /></h4>
+			<h5>Review</h5>
 			{questions.questionNumber}{questions}
 
 		</div>

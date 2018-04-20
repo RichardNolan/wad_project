@@ -40,14 +40,14 @@ const Question = (props) => {
 		let tick_correct = correct===true && key===chosen_index ? <div className="symbol correct">{"\u2714"}</div> : null;
 		return (
 			<div key={key} className="question_div"> 
-				{tick_incorrect} 		
-				{tick_correct} 		
 				<a 
 					className="waves-effect btn answer"
 					onClick={checkAnswer} 				
 					index={key}
 					disabled={isDisabled}
 				>{pa}</a>
+				{tick_incorrect} 		
+				{tick_correct} 		
 			</div>
 		);
 	});

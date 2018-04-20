@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #222;
   height: 150px;
@@ -22,7 +17,42 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.pointer{
+  cursor:pointer;
 }
+nav{
+  z-index: 9999;
+}
+.brand-logo{
+  margin-top:4px;
+}
+@media (max-width: 600px) { 
+  .card{
+    margin:0px;
+  }
+  .card .card-content{
+    padding:4px;
+  }
+  .collapsible-body{
+    padding:4px;
+    padding-top:12px;
+  }
+  .row{
+    margin-bottom: 8px;
+  }
+  h4{
+    font-size: 1.8rem;
+  }
+  h5{
+    font-size: 1.3rem;
+  }
+  .answer{
+    font-size: 12px;
+  }
+ }
+ 
+@media (max-width: 370px) { 
+  .tabs .tab a{
+    font-size: 12px;
+  }
+ }

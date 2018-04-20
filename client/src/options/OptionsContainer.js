@@ -74,25 +74,25 @@ class OptionsContainer extends Component {
 				<br/>
 				<ul className="collapsible">
 					<li>
-						<div className="collapsible-header"><i className="material-icons teal-text">saves</i>SAVED QUIZZES</div>
-						<div className="collapsible-body">
+						<div className="collapsible-header teal white-text"><i className="material-icons">saves</i>SAVED QUIZZES</div>
+						<div className="collapsible-body teal lighten-5">
 							<SavedQuizzes/>
 						</div>
 					</li>
 					<li >
-						<div className="collapsible-header  "><i className="material-icons teal-text ">extension</i>CUSTOMIZE A QUIZ </div>
+						<div className="collapsible-header teal white-text "><i className="material-icons  ">extension</i>CUSTOMIZE A QUIZ </div>
 						<div className="collapsible-body">
-							<div className="row">
-								<div className="row">
-									<Link className="waves-effect btn answer col s12 m2 offset-m2" to="/options/category">Category</Link>
-									<Link className="waves-effect btn answer col s12 m2 offset-m1" to="/options/difficulty">Difficulty</Link>
-									<Link className="waves-effect btn answer col s12 m2 offset-m1" to="/options/amount">Amount</Link>
-								</div>
+							<div className="row">							
 								<Link to="/quiz" 
 									className="waves-effect waves-light btn answer s10 offset-s1"
 									onClick={this.passOptionsBackUp.bind(this)}
 								>Start the Quiz</Link>
 								{/* <button onClick={this.passOptionsBackUp.bind(this)} >Finished</button> */}
+								<div className="row">
+									<Link className="waves-effect btn answer col s10 m2 offset-s1 offset-m2" to="/options/category">Category</Link>
+									<Link className="waves-effect btn answer col s10 m2 offset-s1 offset-m1" to="/options/difficulty">Difficulty</Link>
+									<Link className="waves-effect btn answer col s10 m2 offset-s1 offset-m1" to="/options/amount">Amount</Link>
+								</div>
 							</div>
 							
 							{/* <Difficulty setDifficulty={this.setDifficulty.bind(this)} chosen={this.state.difficulty}/>

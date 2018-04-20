@@ -20,7 +20,7 @@ const QuestionList = (props)=>{
 				</div>
 			</div>
 
-			{props.editid === q._id ? <NewQuestionContainer question={q} closeEditQuestion={()=> props.closeEditQuestion()}/> : null}
+			{props.editid === q._id ? <NewQuestionContainer question={q} closeEditQuestion={(data)=> props.closeEditQuestion(data)}/> : null}
 
 		</div>
 	));

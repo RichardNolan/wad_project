@@ -51,8 +51,12 @@ class EditQuizContainer extends Component {
 			});
 	}
 	
-	closeEditQuestion(){
-		this.setState({editid:null});
+	closeEditQuestion(data){
+		!data._id && (data._id = data.id)
+		let questions = this.state.questions.map(q=>{
+			return q._id===data.id ? data : q
+		})
+		this.setState({editid:null, questions:questions});
 	}
 	
 	render () {

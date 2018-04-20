@@ -129,15 +129,17 @@ class NewQuestionContainer extends Component {
 	updateQuestion(cb){
 		if(this.isValidQuestion()){
 			let obj = Object.assign({}, this.state);
+			obj.id = obj._id;
 			delete obj._id;
 			obj.password = prompt("Password");
 			FETCH.updateQuestion(this.state._id, obj)
 				.then(data=>{
-					console.log("RETURN FROM FETCH", data);
+					if(data.error){
+						M.toast({html: data.message});
+						return false;
+					}
 					M.toast({html: "The question has been updated"});
-					this.props.closeEditQuestion();
-					//this.setState(); needs a mount 
-					//window.location.reload();   runs but jquery creator pops wrong
+					this.props.closeEditQuestion(data);
 				}); 
 		}
 	}

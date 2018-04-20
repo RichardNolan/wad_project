@@ -23,6 +23,8 @@ main{
     width:80%;
     margin:10%;
     margin-top:0px;
+    padding-top:40px;
+    padding-bottom:40px;
     background-color: aliceblue;
     z-index: 10001;
     text-align: center;

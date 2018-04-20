@@ -49,6 +49,7 @@ class App extends Component {
 						</div>
 					</nav>
 				</div>
+
 				<main>
 					<Route exact path="/" component={Home} />
 					<Route exact path="/quickquiz" render={(props) => <QuizContainer {...props} />} />

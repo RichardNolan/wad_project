@@ -1,6 +1,7 @@
 import React from "react";
 import Question from "./Question";
 import Score from "./Score";
+import Loader from '../loader'
 
 import "./quiz.css";
 
@@ -31,9 +32,10 @@ const Quiz = (props) => {
 				onClick={props.onNext}
 			>&#9656;</a>
 
-			{questions.length>0 ? questions[props.current] : "LOADING  COMPONENT"}
+			{questions.length>0 ? questions[props.current] : <Loader/>}
 			
-
+				
+				
 
 		</div>
 	);

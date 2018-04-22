@@ -7,3 +7,25 @@
     background-color: aliceblue;
     padding:8px;
 }
+
+.alignment li > a{
+    align-content: center;
+    padding:0;
+    
+    /* display: inline-block; */
+}
+
+.alignment > li{
+    max-width: 32px;
+    padding: 1em;
+    /* display: inline-block; */
+}
+
+.alignment{
+    display:inline-block;
+    min-width:64px;
+    align-content: center;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    border-radius: 3px;
+    
+}

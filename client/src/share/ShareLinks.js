@@ -1,23 +1,25 @@
 import React from "react";
-import ShareButton from 'react-social-share-buttons'
+import ShareButton from "react-social-share-buttons";
 import M from "materialize-css/dist/js/materialize.js";
-import "./share.css"
+import "./share.css";
 
 // const ShareLinks =(props)=>{
 class ShareLinks extends React.Component{
 	constructor(){
-		super()
+		super();
 		this.state = {
 			show:false,
 			platforms:["facebook", "twitter"]
-		}
+		};
 		
 	}
 
 	componentDidMount(){
-		
-	let elem = document.querySelector('.dropdown-trigger');
-	let instance = M.Dropdown.init(elem);
+		let elem = document.querySelector(".dropdown-trigger");
+		M.Dropdown.init(elem,{
+			coverTrigger:false,
+			constrainWidth: false,
+			gutter: 1});
 	}
 
 	showHide(){
@@ -26,22 +28,22 @@ class ShareLinks extends React.Component{
 
 	render(){
 		let {link, text} = this.props;
-		let url = "https://OURWEBSITE.com/"+link
-		let media = "https://OURWEBSITE.com/IMAGE.png"
+		let url = "https://OURWEBSITE.com/"+link;
+		let media = "https://OURWEBSITE.com/IMAGE.png";
 		let platforms = this.state.platforms.map((p,i)=>(
 			// <div className="col" key={i}>
-				<ShareButton	
-					key={i}		
-					compact
-					socialMedia={p}
-					url={url}
-					media={media}
-					text={text}
-				/>
+			<ShareButton	
+				key={i}		
+				compact
+				socialMedia={p}
+				url={url}
+				media={media}
+				text={text}
+			/>
 			// </div>
-		))
-		let classes = "floating-menu row "
-		classes += this.state.visible ? '' : 'hide'
+		));
+		let classes = "floating-menu row ";
+		classes += this.state.visible ? "" : "hide";
 		return (
 			// <div class="social-menu">
 			// 	<i className="material-icons blue-text pointer" onClick={this.showHide.bind(this)}>share</i>
@@ -52,13 +54,13 @@ class ShareLinks extends React.Component{
 			// </div>
 
 			<span>
-				<i className="dropdown-trigger material-icons" data-target='dropdown1'>share</i>
+				<i className="dropdown-trigger material-icons" data-target="dropdown1">share</i>
 				{/* <!-- Dropdown Structure --> */}
-				<ul id='dropdown1' className='dropdown-content'>
+				<ul id="dropdown1" className="dropdown-content alignment ">
 					<li>{platforms}</li>
 				</ul>
 			</span>
-		)
+		);
 	}
 
 	

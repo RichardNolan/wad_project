@@ -19,11 +19,11 @@ class EditQuizContainer extends Component {
 
 	componentDidMount(){
 		FETCH.quiz(this.state.id).then(res=>{
-			console.log(res)
 			if(res.error) throw new Error(res.message)
 			else this.setState({name:res.name, questions:res.questions });
 		}).catch(err=>{
-			M.toast({html: "Version 2 will have a graceful crash... for now this is it"});
+			console.log(err)
+			M.toast({html:  err.message || "Version 2 will have a graceful crash... for now this is it"});
 		});
 	}
 
@@ -40,7 +40,8 @@ class EditQuizContainer extends Component {
 					M.toast({html: "You have updated the quiz name"});
 				}
 			}).catch(err=>{
-				M.toast({html: "Version 2 will have a graceful crash... for now this is it"});
+				console.log(err)
+				M.toast({html:  err.message || "Version 2 will have a graceful crash... for now this is it"});
 			});
 	}
 
@@ -57,7 +58,7 @@ class EditQuizContainer extends Component {
 					? $("div[data-question='"+id+"']").slideUp()
 					: (res.error ? M.toast({html: res.message}) :  M.toast({html: "Nothing was deleted"}));
 			}).catch(err=>{
-				M.toast({html: "Version 2 will have a graceful crash... for now this is it"});
+				M.toast({html: err.message || "Version 2 will have a graceful crash... for now this is it"});
 			});
 	}
 	

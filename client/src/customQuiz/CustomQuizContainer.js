@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import {Redirect, Route} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import NewQuestionContainer from "./NewQuestionContainer";
 import CustomQuizDetails from "./CustomQuizDetails";
 
-import CustomQuizFinished from "./CustomQuizFinished.js";
 
 import M from "materialize-css/dist/js/materialize.js";
 import FETCH from "../fetch.js";
@@ -31,10 +30,10 @@ class CustomQuizContainer extends Component {
 			M.toast({html: "You must enter a name for this quiz"});
 			return false;
 		}
-		// if(!this.state.name.match(/^[a-z0-9]+$/i)){
-		// 	M.toast({html: "Only alphanumeric characters are allowed"});
-		// 	return false;
-		// }
+		if(this.state.name.match(/[^a-z0-9" "]+/i)){
+			M.toast({html: "Only alphanumeric characters are allowed"});
+			return false;
+		}
 		if(this.state.password.length<6){
 			M.toast({html: "Password must be at least 6 characters"});
 			return false;

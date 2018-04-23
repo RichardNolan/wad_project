@@ -28,12 +28,14 @@ const Amount = (props) => {
 
 	return (
 		<div className="row">
-			<div className="card col s10 offset-s1">
+			<div className=" col s10 offset-s1">
 				<div className="input-field">
 					{/* media query to show +- on mobile hide on desktop */}
-					<button onClick={stepDown}>-</button>
-					<input ref={el=>amountBox=el} style={{maxWidth:2+"em", textAlign:"center" }} type="number" step="5" max="50" min="5" onChange={changeHandler} value={props.chosen}/>
-					<button onClick={stepUp}>+</button>
+					{/* <button onClick={stepDown}>-</button> */}
+					<a className="waves-effect waves-light btn" onClick={stepDown}>-</a>
+					<input ref={el=>amountBox=el} style={{maxWidth:2+"em", textAlign:"center", marginLeft:"8px", marginRight:"8px"}} type="number" step="5" max="50" min="5" onChange={changeHandler} value={props.chosen}/>
+					{/* <button onClick={stepUp}>+</button> */}
+					<a className="waves-effect waves-light btn" onClick={stepUp}>+</a>
 				</div>
 			</div>
 		</div>

@@ -43,7 +43,6 @@ module.exports = (()=>{
     // THIS IS THE STANDARD RESPONSE FOR ALL API CRUD REQUESTS
     // IF DATA IS RETURNED RES.SEND IT OTHERWISE SEND AN EMPTY OBJECT
     const respond = (data, res)=>{
-        // console.log("RESPOND", data)
         // data
         // ? res.send(data)
         // : res.send({});

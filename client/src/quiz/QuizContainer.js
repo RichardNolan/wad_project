@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Quiz from "./Quiz";
 import ResultsQuiz from "./ResultsQuiz";
 import FETCH from "../fetch.js";
+import M from "materialize-css/dist/js/materialize.js";
 
 class QuizContainer extends Component {
 	constructor({ match }) {
@@ -26,7 +27,8 @@ class QuizContainer extends Component {
 					});
 					return res.questions;
 				}).catch(err=>{
-					console.log("RETURN FROM FETCH", err);
+					M.toast({html: err});
+					// console.log("RETURN FROM FETCH", err)
 				})
 				: FETCH.questions(this.props.options);
 
@@ -39,7 +41,8 @@ class QuizContainer extends Component {
 				return q;
 			})});
 		}).catch(err=>{
-			console.log("RETURN FROM FETCH", err);
+			M.toast({html: err});
+			// console.log("RETURN FROM FETCH", err)
 		});
 	}
 

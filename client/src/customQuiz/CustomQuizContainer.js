@@ -94,6 +94,7 @@ class CustomQuizContainer extends Component {
 		}else{
 			//TOAST
 			// console.log("YOU MUST HAVE AT LEAST 1 QUESTION");
+			M.toast({html: "You must have at least one question to save a quiz"});
 		}
 	}
 

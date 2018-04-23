@@ -81,7 +81,7 @@ module.exports = (()=>{
 			const _replaceOne = (id, obj, collection)=>{
 				// if(obj.quiz_id && typeof obj.quiz_id === "string") obj.quiz_id=mongoID(obj.quiz_id)  // This makes sure any updated questions quiz_id is a MongoID not a string
 				// !isMongoID(obj.quiz_id) && obj.quiz_id=mongoID(obj.quiz_id)  // This makes sure any updated questions quiz_id is a MongoID not a string
-				return new Promise((resolve, reject)=>{					
+				return new Promise((resolve, reject)=>{			
 					collection && collection.replaceOne({_id:mongoID(id)}, obj, (err, data)=>{
 						if(err || data.modifiedCount===0) reject({error:true, message:"Nothing was updated"})
 						else resolve(data.ops[0]);
@@ -182,6 +182,12 @@ const _deleteQuestion = (id, obj)=>{
 		.catch(err=>err)
 	}
 
+const _replaceQuestion = (id, obj)=>{
+	return _checkPassword(obj.quiz_id, obj.password)
+		.then(()=> _replaceOne(id, obj, _QUESTIONS))
+		.catch(err=>err)
+	}
+	
 
 /**
  * RETURNED BOOLEAN WHICH WE CHANGED TO RETURN A RESOLVED PROMISE (BELOW)
@@ -197,6 +203,7 @@ const _checkPassword = (quiz_id, password)=>{
 	return new Promise((resolve, reject)=>{
 		_findByID(quiz_id, _QUIZ)
 			.then(data=> {
+				// console.log(data.password,password)
 				data.password===password ? resolve(true) : reject({error:true, message:"PASSWORD FAILED"})
 			})
 			.catch(err=> reject(err))
@@ -251,7 +258,7 @@ function testFunction(){
 
 		postQuestion: 		obj=> _insertOne(obj, _QUESTIONS),					// C
 		getQuestion: 		id=> _findByID(id, _QUESTIONS),						// R		// PROBABLY NOT NEEDED
-		replaceQuestion: 	(id, obj)=> _replaceOne(id, obj, _QUESTIONS),		// U
+		replaceQuestion: 	(id, obj)=> _replaceQuestion(id, obj),				// U
 		deleteQuestion: 	(id, obj)=> _deleteQuestion(id, obj),				// D
 
 		getQuestions: 		obj=> _find(obj, _QUESTIONS),

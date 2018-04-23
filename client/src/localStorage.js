@@ -22,6 +22,12 @@ module.exports = (() => {
         localStorage.setItem('quizzes', JSON.stringify(quizzes));
     }
 
+    const _getOne = (id)=>{
+        let quizzes = _SAVED();
+        if(!typeof quizzes === "object") return null;
+        return quizzes.filter(q=>q.id===id)[0];
+    }
+
     const _deleteByID = id=>{
         let index = -1;
         let quizzes = _SAVED();
@@ -37,6 +43,7 @@ module.exports = (() => {
         getSavedQuizzes: ()=> _SAVED(),
         saveQuiz: (name, id)=> _saveQuiz(name, id),
         updateName: (name, id)=> _updateName(name, id),
-        deleteByID: id=> _deleteByID(id)
+        deleteByID: id=> _deleteByID(id),
+        getByID: id=> _getOne(id)
     };
 })();

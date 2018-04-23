@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Redirect, Route} from 'react-router-dom';
 import NewQuestionContainer from "./NewQuestionContainer";
 import CustomQuizDetails from "./CustomQuizDetails";
 
@@ -30,8 +31,16 @@ class CustomQuizContainer extends Component {
 			M.toast({html: "You must enter a name for this quiz"});
 			return false;
 		}
+		// if(!this.state.name.match(/^[a-z0-9]+$/i)){
+		// 	M.toast({html: "Only alphanumeric characters are allowed"});
+		// 	return false;
+		// }
 		if(this.state.password.length<6){
 			M.toast({html: "Password must be at least 6 characters"});
+			return false;
+		}
+		if(!this.state.password.match(/(?=.*[A-Z])(?=.*[0-9])/)){
+			M.toast({html: "Password must contain at least 1 number and at least 1 uppcase letter"});
 			return false;
 		}
 		if(this.state.password===""){
@@ -44,7 +53,7 @@ class CustomQuizContainer extends Component {
 		}
 		FETCH.saveQuiz(this.state)
 			.then(data=>{
-				console.log("RETURN FROM FETCH", data)
+				// console.log("RETURN FROM FETCH", data)
 				this.setState({returned:data});
 				storage.saveQuiz(data.name, data._id);
 			});
@@ -84,7 +93,7 @@ class CustomQuizContainer extends Component {
 			this.setState({finished:true});
 		}else{
 			//TOAST
-			console.log("YOU MUST HAVE AT LEAST 1 QUESTION");
+			// console.log("YOU MUST HAVE AT LEAST 1 QUESTION");
 		}
 	}
 
@@ -112,7 +121,9 @@ class CustomQuizContainer extends Component {
 			/>;
 		return (
 			<div>
-				{this.state.returned ? <CustomQuizFinished text={this.state.returned.name} link={"/quiz/"+this.state.returned._id} /> : QuizDetailsQuestions}				
+				{/* redirect to custom route for CUSTOMQUIZFINISHED such as /share/quiz/:id  this component retrieves nam from localStorage or fetch rather than from props    */}
+				{/* {this.state.returned ? <CustomQuizFinished text={this.state.returned.name} link={"/quiz/"+this.state.returned._id} /> : QuizDetailsQuestions}				 */}
+				{this.state.returned ? <Redirect push to={"/share/"+this.state.returned._id} /> : QuizDetailsQuestions}				
 			</div>
 		);
 	}

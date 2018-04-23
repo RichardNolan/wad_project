@@ -133,7 +133,7 @@ class NewQuestionContainer extends Component {
 			obj.password = prompt("Password");
 			FETCH.updateQuestion(this.state._id, obj)
 				.then(data=>{
-					console.log("RETURN FROM FETCH", data);
+					// console.log("RETURN FROM FETCH", data);
 					M.toast({html: "The question has been updated"});
 					this.props.closeEditQuestion();
 					//this.setState(); needs a mount 
@@ -173,7 +173,11 @@ class NewQuestionContainer extends Component {
 						<input type="text" id="question"  value={this.state.question} onChange={this.handleQuestion.bind(this)}/>
 						<label htmlFor="question" className={this.props.question ? "active":null}>Input question here</label>
 					</div>
-					<DifficultyStars onDifficultyChange={this.onDifficultyChange.bind(this)}/>
+					<div className="row">
+						<div className="col s12">
+							<DifficultyStars onDifficultyChange={this.onDifficultyChange.bind(this)}/>
+						</div>
+					</div>
 					<div className="radio row">
 						<label>
 							<input type="radio" name="type" value="boolean" checked={this.state.type === "boolean"} onChange={this.handleRadioChange.bind(this)}/>

@@ -2,13 +2,13 @@ module.exports = (()=>{
     const db = require('./db.js');
 
     const _useApi = (req, res, next)=>{
-        console.log("API REQUEST")
+        // console.log("API REQUEST")
         // WE COULD LIMIT, THROTTLE OR PROTECT OUR API HERE
-        next()
+        next();
     }
 
     const _checkDatabaseConnected = (req,res,next)=>{
-        console.log("DATABASE CHECK")
+        // console.log("DATABASE CHECK")
         !db.isConnected() 
             ? res.send({error:true, message:"There was an error connecting"})
             : next()

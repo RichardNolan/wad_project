@@ -17,15 +17,17 @@ const CustomQuizDetails = (props) => {
 						style={props.passwordSame?{background:"#D6F6ED"}:{background:"#F9D9D4"}} 
 						onChange={props.passwordChangeHandler}
 					/>
-					<label htmlFor="passwd">Give a password to keep it yours</label>
+					<label htmlFor="passwd">A password to keep it secure</label>
 				</div>
 				<div className="input-field">	
-					<i className="material-icons prefix">{props.passwordSame?"done_all":"error_outline"}</i>
-					<input type="password" id="passwd_val" placeholder="Confirm your password" 
+					<i className="material-icons prefix">{props.passwordSame ? "done_all" : "error_outline"}</i>
+					<input type="password" id="passwd_val" 
 						style={props.passwordSame?{background:"#D6F6ED"}:{background:"#F9D9D4"}} 
 						value={props.password_val} onChange={props.password_valChangeHandler}
 					/>	 
+					<label htmlFor="passwd_val">Confirm your password</label>
 				</div>
+				<p>Your password must be at least 6 alphanumeric characters in length and contain at least one number and one uppercase character</p> 
 			</div>
 			<div className="row">
 				<a 

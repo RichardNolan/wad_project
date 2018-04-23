@@ -25,7 +25,7 @@ class DifficultyStars extends Component {
 	render () {
 		let starColor = "amber-text pointer";
 		return (
-			<div >
+			<div>
 				<h5><small>Difficulty&nbsp;&nbsp; -&nbsp;</small>
 				&nbsp;<a onClick={this.clickChangeStar.bind(this)} className={starColor} index="0">{this.state.stars[0]}</a>
 				&nbsp;<a onClick={this.clickChangeStar.bind(this)} className={starColor} index="1">{this.state.stars[1]}</a>

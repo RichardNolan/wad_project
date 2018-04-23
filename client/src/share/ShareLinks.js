@@ -42,8 +42,8 @@ class ShareLinks extends React.Component{
 			/>
 			// </div>
 		));
-		let classes = "floating-menu row ";
-		classes += this.state.visible ? "" : "hide";
+		// let classes = "floating-menu row ";
+		// classes += this.state.visible ? "" : "hide";
 		return (
 			// <div class="social-menu">
 			// 	<i className="material-icons blue-text pointer" onClick={this.showHide.bind(this)}>share</i>

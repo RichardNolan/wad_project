@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import QuizContainer from "./quiz/QuizContainer";
 import OptionsContainer from "./options/OptionsContainer";
 import CustomQuizContainer from "./customQuiz/CustomQuizContainer";
+import CustomQuizFinished from "./customQuiz/CustomQuizFinished";
 import { Route, Link } from "react-router-dom";
 import EditQuizContainer from "./customQuiz/EditQuizContainer.js";
 
@@ -22,7 +23,7 @@ class App extends Component {
 		this.state={
 			amount:20,
 			difficulty:"",
-			category:""
+			category:"", 
 		};
 	}
 	
@@ -58,6 +59,7 @@ class App extends Component {
 					<Route path="/options" render={(props) => <OptionsContainer {...props} setOptions={this.setOptions.bind(this)} />} />	
 					<Route path="/custom" component={CustomQuizContainer} />
 					<Route path="/edit/quiz/:id" component={EditQuizContainer}/>
+					<Route path="/share/:id" component={CustomQuizFinished} />
 				</main>
 			</div>
 		);

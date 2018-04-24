@@ -1,5 +1,5 @@
 module.exports = (()=>{
-    
+    const path = require('path');
 /** OUR OWN MODULES */
     const questions = require('./fetch_questions.js');
     const categories = require('./fetch_categories.js');
@@ -8,7 +8,7 @@ module.exports = (()=>{
 /** ROUTE FUNCTIONS MOVED DOWN HERE ONLY FOR CLARITY */
     // GET ROOT
     const _getRoot = (req, res, next)=>{
-        res.send("Homepage");
+        res.redirect("/app/");
         next();
     }
 
@@ -19,7 +19,7 @@ module.exports = (()=>{
 
     // GET APP
     const _getApp = (req, res, next)=>{
-        res.render('app', {title:"Actual App after build"});
+        res.sendFile(path.join(__dirname, 'public')+"/index.html")
     }
 
     // GET QUESTIONS

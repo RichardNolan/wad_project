@@ -2,7 +2,7 @@ import React from "react";
 import ShareButton from "react-social-share-buttons";
 import M from "materialize-css/dist/js/materialize.js";
 import "./share.css";
-
+import logo from '../logo.png';
 // const ShareLinks =(props)=>{
 class ShareLinks extends React.Component{
 	constructor(){
@@ -28,8 +28,8 @@ class ShareLinks extends React.Component{
 
 	render(){
 		let {link, text} = this.props;
-		let url = "https://OURWEBSITE.com/"+link;
-		let media = "https://OURWEBSITE.com/IMAGE.png";
+		let url = "https://quizzanywhere.herokuapp.com/"+link;
+		let media = "https://quizzanywhere.herokuapp.com/"+logo;
 		let platforms = this.state.platforms.map((p,i)=>(
 			// <div className="col" key={i}>
 			<ShareButton	

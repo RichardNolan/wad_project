@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 /** SERVER RENDERED PAGES - NOT CURRENTLY BEING USED*/
     app.get('/', routes.getRoot);
     app.get('/signup', routes.getSignup);
-    app.get('/app', routes.getApp);
+    app.get('/app/*', routes.getApp);
 
 /** API ROUTES FOR 3rd PARTY QUESTIONS (opentdb.com) */
     app.get('/api/questions', routes.getQuestions);

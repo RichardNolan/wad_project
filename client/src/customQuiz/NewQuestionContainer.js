@@ -131,7 +131,7 @@ class NewQuestionContainer extends Component {
 			let obj = Object.assign({}, this.state);
 			obj.id = obj._id;
 			delete obj._id;
-			obj.password = prompt("Password");
+			obj.password = this.props.password;
 			FETCH.updateQuestion(this.state._id, obj)
 				.then(data=>{
 					if(data.error){

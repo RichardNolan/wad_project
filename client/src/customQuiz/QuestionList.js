@@ -15,12 +15,11 @@ const QuestionList = (props)=>{
 				</div>
 				<div className="col s3 right-align">
 					<i className="material-icons blue-text" onClick={()=>props.setEditId(q._id)}>edit</i>
-					{/* <Link to={"../../api/custom/question/"+q._id}><i className="material-icons red-text">close</i></Link> */}
 					<i className="material-icons red-text" onClick={()=>props.deleteQuestion(q._id)}>close</i>
 				</div>
 			</div>
 
-			{props.editid === q._id ? <NewQuestionContainer question={q} closeEditQuestion={(data)=> props.closeEditQuestion(data)}/> : null}
+			{props.editid === q._id ? <NewQuestionContainer password={props.password} question={q} closeEditQuestion={(data)=> props.closeEditQuestion(data)}/> : null}
 
 		</div>
 	));

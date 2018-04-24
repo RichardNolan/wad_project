@@ -4,8 +4,9 @@ var bodyParser = require('body-parser');
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.use(express.static(path.join(__dirname, 'client/build')));
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -33,8 +34,8 @@ app.use(bodyParser.json());
 
 /** SERVER RENDERED PAGES - NOT CURRENTLY BEING USED*/
     app.get('/', routes.getRoot);
-    app.get('/signup', routes.getSignup);
-    app.get('/app', routes.getApp);
+    // app.get('/signup', routes.getSignup);
+    app.get('/app/', routes.getApp);
 
 /** API ROUTES FOR 3rd PARTY QUESTIONS (opentdb.com) */
     app.get('/api/questions', routes.getQuestions);
@@ -55,8 +56,9 @@ app.use(bodyParser.json());
     // app.get('/api/custom/questions/:id', routes.getCustomQuizQuestions);
     app.post('/api/custom/questions', routes.postCustomQuestions);
 
-
+    app.get('*', routes.getApp)
+      
 // added message to show server is running
-    app.listen(process.env.port || 3001,()=>{
-        console.log('Listening on port '+(process.env.port || 3001));
+    app.listen(process.env.PORT || 3001,()=>{
+        console.log('Listening on port '+(process.env.PORT || 3001));
     });

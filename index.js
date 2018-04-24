@@ -55,6 +55,7 @@ app.use(bodyParser.json());
     // app.get('/api/custom/questions/:id', routes.getCustomQuizQuestions);
     app.post('/api/custom/questions', routes.postCustomQuestions);
 
+    app.get('/*', routes.getApp)
 
 // added message to show server is running
     app.listen(process.env.PORT || 3001,()=>{

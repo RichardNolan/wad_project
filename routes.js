@@ -19,7 +19,7 @@ module.exports = (()=>{
 
     // GET APP
     const _getApp = (req, res, next)=>{
-        res.sendFile(path.join(__dirname)+"/index.html")
+        res.sendFile("index.html")
     }
 
     // GET QUESTIONS

@@ -123,7 +123,7 @@ class CustomQuizContainer extends Component {
 			<div>
 				{/* redirect to custom route for CUSTOMQUIZFINISHED such as /share/quiz/:id  this component retrieves nam from localStorage or fetch rather than from props    */}
 				{/* {this.state.returned ? <CustomQuizFinished text={this.state.returned.name} link={"/quiz/"+this.state.returned._id} /> : QuizDetailsQuestions}				 */}
-				{this.state.returned ? <Redirect push to={"/share/"+this.state.returned._id} /> : QuizDetailsQuestions}				
+				{this.state.returned ? <Redirect push to={"/share/"+this.state.returned._id+"/"+this.state.returned.name} /> : QuizDetailsQuestions}				
 			</div>
 		);
 	}

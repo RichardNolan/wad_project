@@ -4,8 +4,9 @@ var bodyParser = require('body-parser');
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.use(express.static(path.join(__dirname, 'client/build')));
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -33,7 +34,7 @@ app.use(bodyParser.json());
 
 /** SERVER RENDERED PAGES - NOT CURRENTLY BEING USED*/
     app.get('/', routes.getRoot);
-    app.get('/signup', routes.getSignup);
+    // app.get('/signup', routes.getSignup);
     app.get('/app/', routes.getApp);
 
 /** API ROUTES FOR 3rd PARTY QUESTIONS (opentdb.com) */

@@ -59,7 +59,7 @@ class App extends Component {
 					<Route path="/options" render={(props) => <OptionsContainer {...props} setOptions={this.setOptions.bind(this)} />} />	
 					<Route path="/custom" component={CustomQuizContainer} />
 					<Route path="/edit/quiz/:id" component={EditQuizContainer}/>
-					<Route path="/share/:id" component={CustomQuizFinished} />
+					<Route path="/share/:id/:name" component={CustomQuizFinished} />
 				</main>
 			</div>
 		);

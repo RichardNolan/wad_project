@@ -44,7 +44,6 @@ class SavedQuizzes extends React.Component{
 					<Link to={"/quiz/"+q.id} className="waves-effect btn col s12">{q.name}</Link>
 				</div>
 				<div className="col s5 m3">
-					{/* KEPT BOTH THESE LINES IN MERGE */}
 					
 					<ShareLinks text="I challenge you to a Quiz-Off" link={"quiz/"+q.id} />
 

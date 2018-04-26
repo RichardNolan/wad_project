@@ -17,7 +17,8 @@ class EditQuizContainer extends Component {
 			id: match.params.id, 
 			name:"", 
 			modal_open:true,
-			modal_text:""
+			modal_text:"", 
+			password:""
 		};
 	}
 
@@ -27,7 +28,7 @@ class EditQuizContainer extends Component {
 			FETCH.quiz(this.state.id).then(res=>{
 				if(res.password!==password) throw new Error("Password failed")
 				if(res.error) throw new Error(res.message)
-				else this.setState({name:res.name, questions:res.questions });
+				else this.setState({password:password, name:res.name, questions:res.questions });
 			}).catch(err=>{
 				M.toast({html:  err.message || "Version 2 will have a graceful crash... for now this is it"});
 			});
@@ -41,7 +42,7 @@ class EditQuizContainer extends Component {
 	updateName(){
 		// this.askForPassword((password)=>{
 		    // let password=prompt("pw");
-			FETCH.updateName(this.state.id, {name:this.state.name, password:password})
+			FETCH.updateName(this.state.id, {name:this.state.name, password:this.state.password})
 				.then(res=>{
 					if(res.error) throw new Error(res.message)
 					if(res.data){
@@ -66,7 +67,7 @@ class EditQuizContainer extends Component {
 
 	deleteQuestion(id){
 		// this.askForPassword((password)=>{
-			FETCH.deleteQuestion(id, {quiz_id:this.state.id, password:password})
+			FETCH.deleteQuestion(id, {quiz_id:this.state.id, password:this.state.password})
 				.then(res=>{
 					if(res.error) throw new Error(res.message)
 					res.id

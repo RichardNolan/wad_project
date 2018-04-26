@@ -5,7 +5,7 @@ module.exports = (()=>{
 		"Content-Type": "application/json",
 		// "X-Auth-Token": "API_KEY" 
 	});
-	const root = "http://localhost:3001/api";
+	const root = "/api";
 
 
 	const _GET = (url, data)=> _FETCH("GET", url, data);

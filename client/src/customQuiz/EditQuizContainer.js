@@ -39,7 +39,7 @@ class EditQuizContainer extends Component {
 	}
 
 	updateName(){
-		this.askForPassword((password)=>{
+		// this.askForPassword((password)=>{
 		    // let password=prompt("pw");
 			FETCH.updateName(this.state.id, {name:this.state.name, password:password})
 				.then(res=>{
@@ -54,7 +54,7 @@ class EditQuizContainer extends Component {
 				});
 
 
-		})
+		// })
 		
 
 		
@@ -65,7 +65,7 @@ class EditQuizContainer extends Component {
 	}
 
 	deleteQuestion(id){
-		this.askForPassword((password)=>{
+		// this.askForPassword((password)=>{
 			FETCH.deleteQuestion(id, {quiz_id:this.state.id, password:password})
 				.then(res=>{
 					if(res.error) throw new Error(res.message)
@@ -75,7 +75,7 @@ class EditQuizContainer extends Component {
 				}).catch(err=>{
 					M.toast({html: err.message || "Version 2 will have a graceful crash... for now this is it"});
 				});
-		});
+		// });
 	}
 	
 	closeEditQuestion(data){

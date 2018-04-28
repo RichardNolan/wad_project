@@ -11,10 +11,11 @@ const CustomQuizDetails = (props) => {
 				</div>
 			</div>
 			<div className="card col s10 offset-s1">
+				<blockquote>Your password must be at least 6 alphanumeric characters in length and contain at least one number and one uppercase character</blockquote> 
 				<div className="input-field">
 					<i className="material-icons prefix">vpn_key</i>
 					<input type="password" id="passwd" value={props.password} 
-						style={props.passwordSame?{background:"#D6F6ED"}:{background:"#F9D9D4"}} 
+						style={props.passwordOK?{background:"#D6F6ED"}:{background:"#F9D9D4"}} 
 						onChange={props.passwordChangeHandler}
 					/>
 					<label htmlFor="passwd">A password to keep it secure</label>
@@ -27,7 +28,6 @@ const CustomQuizDetails = (props) => {
 					/>	 
 					<label htmlFor="passwd_val">Confirm your password</label>
 				</div>
-				<p>Your password must be at least 6 alphanumeric characters in length and contain at least one number and one uppercase character</p> 
 			</div>
 			<div className="row">
 				<a 

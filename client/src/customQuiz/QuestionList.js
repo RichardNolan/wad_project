@@ -6,7 +6,7 @@ import NewQuestionContainer from "./NewQuestionContainer.js";
 const QuestionList = (props)=>{
 	
 	let questions = props.questions || [];	
-
+	
 	questions = questions.map((q, i)=>(
 		<div key={i} data-question={q._id} >
 			<div className="row">

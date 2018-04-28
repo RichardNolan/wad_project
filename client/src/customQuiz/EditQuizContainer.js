@@ -109,7 +109,7 @@ class EditQuizContainer extends Component {
 											nameChangeHandler={this.nameChangeHandler.bind(this)} 
 											updateName={this.updateName.bind(this)}
 										/>
-										: <h1>VERIFICATION REQUIRED</h1>}
+										: <h3 className="center-align">VERIFICATION REQUIRED</h3>}
 				{this.state.questions  ? <QuestionList questions={this.state.questions} 
 											password={this.state.password}
 											editid={this.state.editid} 

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Category = (props) => {
-	let categories = props.categories.slice() || [];
+	let categories = props.categories ? props.categories.slice() : [];
 
 	categories.unshift({id:"", name:"Any Category"});
 

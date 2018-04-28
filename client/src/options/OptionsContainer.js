@@ -22,12 +22,14 @@ class OptionsContainer extends Component {
 	}
 	
 	componentDidMount(){
-		FETCH.categories().then(categories=>{
-			this.setState({categories:categories});
-		});   
 		var elem = document.querySelector(".collapsible");
 		// var instance = M.Collapsible.init(elem);
 		M.Collapsible.init(elem);
+
+		FETCH.categories().then(categories=>{
+			if(!categories.error) this.setState({categories:categories});
+			else M.toast({html: "Having trouble getting Categories online..."});
+		})   
 	}
 
 	setCategory(cat){
@@ -79,7 +81,7 @@ class OptionsContainer extends Component {
 							<SavedQuizzes/>
 						</div>
 					</li>
-					<li >
+					<li className="active">
 						<div className="collapsible-header teal white-text "><i className="material-icons  ">extension</i>CUSTOMIZE A QUIZ </div>
 						<div className="collapsible-body">
 							<div className="nav-content">
@@ -89,6 +91,9 @@ class OptionsContainer extends Component {
 									<li className="tab"><Link to="/options/amount" className="white-text">Amount</Link></li>
 								</ul>
 							</div>
+							<blockquote>
+								<h5 className="center-align">Choose a category, difficulty and amount of questions from above</h5>
+							</blockquote>
 							{/* <div className="row">							
 								<Link to="/quiz" 
 									className="waves-effect waves-light btn answer s10 offset-s1"

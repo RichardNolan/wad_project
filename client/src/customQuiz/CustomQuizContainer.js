@@ -17,39 +17,64 @@ class CustomQuizContainer extends Component {
 			password:"",
 			password_val:"",
 			// password2:"",
-			passwordSame:true,
+			passwordSame:false,
+			passwordOK:false,
 			questions:[],
 			finished:false, 
 			nextQuestion:false	
 		};
 	}
 	
-	saveQuiz(){
+	validate(){
 		//VALIDATE THE QUIZ DETAILS
 		if(this.state.name===""){
-			M.toast({html: "You must enter a name for this quiz"});
-			return false;
+			return {passed:false, reason: "You must enter a name for this quiz"};
 		}
 		if(this.state.name.match(/[^a-z0-9" "]+/i)){
-			M.toast({html: "Only alphanumeric characters are allowed"});
-			return false;
+			return {passed:false, reason: "Only alphanumeric characters are allowed"};
 		}
-		if(this.state.password.length<6){
-			M.toast({html: "Password must be at least 6 characters"});
-			return false;
+
+		// PASSWORD VALID CHECK ABSTRACTED FOR REUSE
+		let isPwValid = this.isPasswordValid();
+		if(!isPwValid){
+			return isPwValid;
 		}
-		if(!this.state.password.match(/(?=.*[A-Z])(?=.*[0-9])/)){
-			M.toast({html: "Password must contain at least 1 number and at least 1 uppcase letter"});
-			return false;
-		}
-		if(this.state.password===""){
-			M.toast({html: "You must enter a password for this quiz"});
-			return false;
-		}
+
 		if(!this.state.passwordSame){
-			M.toast({html: "Passwords don't match"});
+			return {passed:false, reason: "Passwords don't match"};
+		}
+		
+		if(!this.state.passwordSame){
+			return {passed:false, reason: "Passwords don't match"};
+		}
+		// if nothing returned yet as a failed validation return passed with no reson
+		return {passed:true, reason:""};
+	}
+
+	isPasswordValid(){
+		if(this.state.password===""){
+			this.setState({passwordOK:false});
+			return {passed:false, reason: "You must enter a password for this quiz"};
+		}else if(this.state.password.length<6){
+			this.setState({passwordOK:false});
+			return {passed:false, reason: "Password must be at least 6 characters"};
+		}else if(!this.state.password.match(/(?=.*[A-Z])(?=.*[0-9])/)){
+			this.setState({passwordOK:false});
+			return {passed:false, reason: "Password must contain at least 1 number and at least 1 uppcase letter"};
+		}else{
+			this.setState({passwordOK:true});
+			return {passed:true, reason:""};
+		}
+	}
+
+	saveQuiz(){
+		let validation = this.validate();
+
+		if(!validation.passed){
+			M.toast({html: validation.reason});
 			return false;
 		}
+
 		FETCH.saveQuiz(this.state)
 			.then(data=>{
 				// console.log("RETURN FROM FETCH", data)
@@ -71,6 +96,7 @@ class CustomQuizContainer extends Component {
 	
 	passwordChangeHandler(e){
 		this.setState({password:e.currentTarget.value}, ()=>{
+			this.isPasswordValid();
 			this.comparePasswords();
 		});
 	}
@@ -108,6 +134,7 @@ class CustomQuizContainer extends Component {
 				password={this.state.password}
 				password_val={this.state.password_val}
 				passwordSame={this.state.passwordSame}
+				passwordOK={this.state.passwordOK}
 				nameChangeHandler={this.nameChangeHandler.bind(this)} 
 				passwordChangeHandler={this.passwordChangeHandler.bind(this)}
 				password_valChangeHandler={this.password_valChangeHandler.bind(this)}

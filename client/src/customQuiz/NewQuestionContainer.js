@@ -102,15 +102,15 @@ class NewQuestionContainer extends Component {
 
 		// VALIDATION ON BLANK WRONG ANSWERS
 		if(this.state.incorrect_answers[0]===""){
-			M.toast({html: "Missing incorrect answer 1"});
+			M.toast({html: "Missing an incorrect answer"});
 			return false;
 		}
 		if(this.state.incorrect_answers[1]===""){
-			M.toast({html: "Missing incorrect answer 2"});
+			M.toast({html: "Missing an incorrect answer"});
 			return false;
 		}
 		if(this.state.incorrect_answers[2]===""){
-			M.toast({html: "Missing incorrect answer 3"});
+			M.toast({html: "Missing an incorrect answer"});
 			return false;
 		}
 		return true;

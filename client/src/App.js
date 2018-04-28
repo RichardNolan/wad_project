@@ -12,7 +12,8 @@ import "./App.css";
 const Home = ()=>{
 	return (
 		<div>
-
+			<h2 className="center-align" style={{"width":"100%"}}>Quiz Anywhere</h2>
+			<p>An app by Richard Nolan and Araceli Lopez Gomez</p>
 		</div>
 	);
 };

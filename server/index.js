@@ -33,9 +33,9 @@ app.use(bodyParser.json());
 
 
 /** SERVER RENDERED PAGES - NOT CURRENTLY BEING USED*/
-    app.get('/', routes.getRoot);
+    app.get('/', routes.getApp);
     // app.get('/signup', routes.getSignup);
-    app.get('/app/', routes.getApp);
+    // app.get('/app/', routes.getApp);
 
 /** API ROUTES FOR 3rd PARTY QUESTIONS (opentdb.com) */
     app.get('/api/questions', routes.getQuestions);
@@ -56,7 +56,7 @@ app.use(bodyParser.json());
     // app.get('/api/custom/questions/:id', routes.getCustomQuizQuestions);
     app.post('/api/custom/questions', routes.postCustomQuestions);
 
-    app.get('*', routes.getApp)
+    // app.get('*', routes.getApp)
       
 // added message to show server is running
     app.listen(process.env.PORT || 3001,()=>{
